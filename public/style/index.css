@@ -7,11 +7,57 @@
     position: fixed;
     top: 0;
     z-index: 10;
+    text-align: center;
 }
 
-.splash > h1 {
+.content > h1 {
     text-align: center;
     font-family: 'Open Sans';
-    margin-top: 15vh;
     font-size: 3em;
+}
+
+.content {
+    width: 100vw;
+    height: 100vh;
+    margin: 20vh 0;
+}
+
+.search {
+    display: inline-block;
+    height: 4%;
+    width: 100%;
+    border-radius: 6px;
+    font-family: 'Open Sans';
+    font-size: 18px;
+    padding: 5px;
+}
+
+.search:focus {
+    outline-color: #05386B;
+}
+
+form {
+    width: 35%;
+    display: inline-block;
+    position: relative;
+}
+form input {
+    padding-right: 4.6em;
+}
+form button {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    font-size: 1.6em;
+    padding-right: 0;
+    margin-right: 0;
+    color: #555;
+}
+
+@media only screen and (max-width: 425px) {
+    form {
+        width: 70%;
+        display: inline-block;
+        position: relative;
+    }
 }

@@ -189,5 +189,10 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
 
   .right-alt {
       display: block;
+      width: 20%;
+  }
+
+  .left {
+      width: 80%;
   }
 }
