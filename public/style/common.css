@@ -65,38 +65,23 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 100;
 }
 
-.header > div {
-    width: 50%;
-    height: 100%;
+.left, .right, .right-alt {
+    position: relative;
+    height: 8vh;
+    background-color: #5CDB95;
 }
 
 .left {
     float: left;
+    width: 40%;
 }
 
 .right {
     float: right;
-}
-
-.link {
-    width: 25%;
-    float: left;
-    text-align: center;
-    height: 100%;
-}
-
-.link > p {
-    display: inline-block;
-    line-height: 8vh;
-    font-family: Raleway;
-    font-size: 1.3em;
-}
-
-.link > p:hover, .name > p:hover {
-    cursor: pointer;
-    color: #05386B;
+    width: 60%;
 }
 
 .name {
@@ -104,5 +89,105 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
     font-family: Raleway;
     font-size: 2em;
     line-height: 8vh;
+    display: inline-block;
+}
 
+.name:hover {
+    cursor: pointer;
+    color: #05386B;
+}
+
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: right;
+    height: 100%;
+}
+
+.nav > li {
+    float: left;
+    height: 100%;
+}
+
+.nav > li a {
+    display: block;
+    color: black;
+    text-align: center;
+    font-family: Raleway;
+    font-size: 1.4em;
+    padding: 2.2vh 1.5vw;
+    text-decoration: none;
+}
+
+.nav > li a:hover {
+    color: #05386B;
+    cursor: pointer;
+}
+
+.right-alt {
+    display: none;
+    float: right;
+    width: 60%;
+}
+
+.right-alt > i {
+    font-size: 2em;
+    line-height: 8vh;
+    float: right;
+    padding-right: 15px;
+}
+
+.dropdown:hover, .right-alt > i:hover + .dropdown {
+    transition-property: top;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+    top: 8vh;
+}
+
+.dropdown {
+    display: inline-block;
+    background-color: #5CDB95;
+    width: 100vw;
+    position: fixed;
+    z-index: -2;
+    top: -30vh;
+    transition-property: top;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+    left: 0;
+}
+
+.nav-alt {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.nav-alt > li a {
+    display: block;
+    color: white;
+    background-color: #05386B;
+    text-align: center;
+    font-family: Raleway;
+    font-size: 1.4em;
+    padding: 2.2vh 2vw;
+    text-decoration: none;
+}
+
+.nav-alt > li a:hover {
+    color: #BBB;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .right {
+      display: none;
+  }
+
+  .right-alt {
+      display: block;
+  }
 }

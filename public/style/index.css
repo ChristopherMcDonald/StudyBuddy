@@ -1,0 +1,17 @@
+.splash {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../img/study.jpg');
+    background-position: center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.splash > h1 {
+    text-align: center;
+    font-family: 'Open Sans';
+    margin-top: 15vh;
+    font-size: 3em;
+}
