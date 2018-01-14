@@ -61,6 +61,7 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
 .header {
     background-color: #5CDB95;
     height: 8vh;
+    min-height: 50px;
     width: 100vw;
     position: fixed;
     top: 0;
@@ -71,6 +72,7 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
 .left, .right, .right-alt {
     position: relative;
     height: 8vh;
+    min-height: 50px;
     background-color: #5CDB95;
 }
 
@@ -89,6 +91,7 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
     font-family: Raleway;
     font-size: 2em;
     line-height: 8vh;
+    min-height: 50px;
     display: inline-block;
 }
 
