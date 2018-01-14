@@ -92,6 +92,11 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
     display: inline-block;
 }
 
+.name > a {
+    text-decoration: none;
+    color: black;
+}
+
 .name:hover {
     cursor: pointer;
     color: #05386B;
@@ -182,6 +187,30 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
     cursor: pointer;
 }
 
+footer {
+    position: fixed;
+    background-color: #5CDB95;
+    width: 100vw;
+    bottom: 0;
+    z-index: 10;
+}
+
+body {
+    background-color: #5CDB95;
+}
+
+footer > p {
+    font-family: 'Open Sans';
+    font-size: 0.8em;
+    float: left;
+    display: inline-block;
+    padding: 5px;
+}
+
+.pull-right {
+    float: right;
+}
+
 @media only screen and (max-width: 768px) {
   .right {
       display: none;
@@ -195,4 +224,12 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
   .left {
       width: 80%;
   }
+}
+
+@media only screen and (max-width: 425px) {
+    footer > p {
+        clear: both;
+        display: block;
+        text-align: center;
+    }
 }

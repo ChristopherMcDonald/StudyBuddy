@@ -52,6 +52,11 @@ form button {
     padding-right: 0;
     margin-right: 0;
     color: #555;
+    outline: none;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 425px) {
