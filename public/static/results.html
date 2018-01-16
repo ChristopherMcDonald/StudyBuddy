@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>StudyBuddy</title>
 
-        <link rel="stylesheet" href="style/common.css">
+        <link rel="stylesheet" href="../style/common.css">
+        <link rel="stylesheet" href="../style/results.css">
 
         <!-- FontAwesome CDN -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -39,7 +40,93 @@
                     </ul>
                 </div>
             </div>
+        </div><!--.header-->
+        <div class="main">
+            <div class="options">
+                <button class="active-btn">Tabular View</button>
+                <button class="btn">Map View</button>
+            </div><!--.options--><br>
+            <div class="tab">
 
-        </div>
+                <div class="item">
+                    <div class="img pull-left">
+                        <img src="../img/coffee.jpg">
+                    </div>
+                    <div class="detail pull-left">
+                        <a href="/static/detail.html" class="pull-left">Apple Cafe</a><br>
+                        <p class="pull-left">453 Apple St, W</p>
+                    </div>
+                    <div class="detail pull-right">
+                        <p class="pull-right">Overall: 4/5</p><br>
+                        <i class="fa fa-coffee pull-right" aria-hidden="true"></i><br>
+
+                        <div class="wifis pull-right">
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="bottom-right">
+                        <button class="review-btn">Review</button>
+                    </div>
+                </div><!--.item-->
+
+                <div class="item">
+                    <div class="img pull-left">
+                        <img src="../img/class.jpg">
+                    </div>
+                    <div class="detail pull-left">
+                        <a href="/static/detail.html" class="pull-left">McMaster U Library</a><br>
+                        <p class="pull-left">1280 Main St W</p><br>
+                        <p class="pull-left">Hamilton ON</p><br>
+                        <p class="pull-left">N0B 2K0</p>
+                    </div>
+                    <div class="detail pull-right">
+                        <p class="pull-right">Overall: 5/5</p><br>
+                        <i class="fa fa-coffee pull-right" aria-hidden="true"></i><br>
+
+                        <div class="wifis pull-right">
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="bottom-right">
+                        <button class="review-btn">Review</button>
+                    </div>
+                </div><!--.item-->
+
+                <div class="item">
+                    <div class="img pull-left">
+                        <img src="../img/lib.jpg">
+                    </div>
+                    <div class="detail pull-left">
+                        <a href="/static/detail.html" class="pull-left">Hamilton Public Lib</a><br>
+                        <p class="pull-left">123 Some St S</p>
+                    </div>
+                    <div class="detail pull-right">
+                        <p class="pull-right">Overall: 1/5</p><br>
+                        <i class="fa fa-coffee pull-right" aria-hidden="true"></i><br>
+
+                        <div class="wifis pull-right">
+                            <i class="fa fa-wifi" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="bottom-right">
+                        <button class="review-btn">Review</button>
+                    </div>
+                </div><!--.item-->
+            </div><!--.tab-->
+            <div class="map">
+                <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=9&center=43.2557%2C-79.8711&key=AIzaSyB_SLA-Xo3Pl-dUmySemEUcIKokkdI61K0" allowfullscreen></iframe>
+            </div><!--.map->
+        </div><!--.main-->
+        <footer>
+            <p>Built by: Christopher McDonald</p>
+            <p class="pull-right">Contact: <a href="mailto:mail@christophermcdonald.me">
+          mail@christophermcdonald.me</a></p>
+        </footer>
     </body>
 </html>

@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>StudyBuddy</title>
 
-        <link rel="stylesheet" href="style/common.css">
+        <link rel="stylesheet" href="../style/common.css">
+        <link rel="stylesheet" href="../style/review.css">
 
         <!-- FontAwesome CDN -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -39,7 +40,64 @@
                     </ul>
                 </div>
             </div>
+        </div><!--.header-->
+        <div class="main">
+            <h1 class="title">Found a Study Space?</h1><br><br>
+            <form method="GET" class="form" action="/static/results.html">
+                <div class="form-entry">
+                    <label for="name">Name</label><br>
+                    <input type="text" name="name" id="name">
+                </div><br>
 
-        </div>
+                <div class="form-entry">
+                    <label for="address">Address</label><br>
+                    <input type="text" name="address" id="address">
+                </div><br>
+
+                <div class="form-entry">
+                    <label for="city">City</label><br>
+                    <input type="text" name="city" id="city">
+                </div><br>
+
+                <div class="form-entry">
+                    <label for="postalcode">Postal Code</label><br>
+                    <input type="text" name="postalcode" id="postalcode">
+                </div><br>
+
+                <div class="form-entry range">
+                    <label for="wifi">How good was their Wifi?</label><br>
+                    <input type="range" name="wifi" min="0" max="5" id="wifi">
+                    <p style="display: inline-block;">0</p>
+                    <p class="pull-right" style="display: inline-block;">5</p>
+                </div><br><br>
+
+                <div class="form-entry">
+                    <label for="coffee">Did they have coffee?</label><br><br>
+                    <input type="radio" name="coffee" value="yes" id="coffee-y">
+                    <label for="coffee-y">Yes</label>
+                    <input type="radio" name="coffee" value="no" id="coffee-n">
+                    <label for="coffee-n">No</label>
+                </div><br><br>
+
+                <div class="form-entry range">
+                    <label for="rating">How good is this Study Space?</label><br>
+                    <input type="range" name="rating" min="0" max="5" id="rating">
+                    <p style="display: inline-block;">0</p>
+                    <p class="pull-right" style="display: inline-block;">5</p>
+                </div><br>
+
+                <div class="form-entry">
+                    <label for="image">Have any photos?</label><br>
+                    <input type="file" id="image" multiple>
+                </div><br>
+
+                <input type="submit" class="submit">
+            </form>
+        </div><!--.main-->
+        <footer>
+            <p>Built by: Christopher McDonald</p>
+            <p class="pull-right">Contact: <a href="mailto:mail@christophermcdonald.me">
+          mail@christophermcdonald.me</a></p>
+        </footer>
     </body>
 </html>

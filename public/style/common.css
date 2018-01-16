@@ -165,6 +165,7 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
     transition-duration: 0.5s;
     transition-timing-function: linear;
     left: 0;
+    border-bottom: 2px solid white;
 }
 
 .nav-alt {

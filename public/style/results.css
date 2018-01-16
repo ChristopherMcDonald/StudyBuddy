@@ -1,0 +1,120 @@
+.main {
+    display: inline-block;
+    width: 100vw;
+    padding: 10% 0;
+    background-color: #05386B;
+}
+
+button {
+    border: none;
+    font-family: 'Open Sans';
+    font-size: 1.1em;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+.options {
+    margin-left: 20vw;
+}
+
+.options > button {
+    background-color: white;
+    color: black;
+}
+
+.btn:hover {
+    background-color: #CCC !important;
+}
+
+.btn:active {
+    background-color: white !important;
+}
+
+.active-btn:hover {
+    background-color: #8EE4AF !important;
+}
+
+.active-btn:active {
+    background-color: #5CDB95 !important;
+}
+
+.active-btn {
+    background-color: #5CDB95 !important;
+    color: white !important;
+}
+
+.item {
+    background-color: #999;
+    height: 30vh;
+    width: 60vw;
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.tab {
+    width: 100vw;
+    display: inline-block;
+    text-align: center;
+}
+
+.img {
+    height: 100%;
+}
+
+.img > img {
+    width: auto;
+    height: 100%;
+}
+
+.detail {
+    margin-right: 5%;
+}
+
+.detail > a {
+    text-decoration: none;
+}
+
+.detail > a:hover {
+    color: #05386B;
+}
+
+.detail p, .detail i, .detail a {
+    color: white;
+    padding-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.detail p, .detail a {
+    font-family: 'Open Sans';
+}
+
+.wifis {
+    width: 100%;
+    text-align: right;
+}
+
+.detail .pull-left {
+    margin-left: 10px;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.review-btn {
+    background-color: white !important;
+}
+
+.map {
+    width: 100%;
+    text-align: center;
+}
+
+.map > iframe {
+    display: inline-block;
+}
