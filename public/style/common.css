@@ -1,6 +1,8 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
+/*
+    CSS Reset provided by:
+    http://meyerweb.com/eric/tools/css/reset/
+    v2.0 | 20110126
+    License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe,
@@ -48,14 +50,12 @@ table {
 }
 
 /*
-
 Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
 - Dark Blue:#05386B
 - Dark Green: #379683
 - Green: #5CDB95
 - Light Green: #8EE4AF
 - Beige: #EDF5E1
-
  */
 
 .header {
@@ -63,10 +63,10 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
     height: 8vh;
     min-height: 50px;
     width: 100vw;
-    position: fixed;
-    top: 0;
+    position: fixed;    /* ensures header is always visible and doesn't scroll off screen */
+    top: 0;             /* ensures header stays at top of screen at all times */
     left: 0;
-    z-index: 100;
+    z-index: 100;       /* ensures it is visble on top of other elements */
 }
 
 .left, .right, .right-alt {
@@ -77,12 +77,12 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
 }
 
 .left {
-    float: left;
+    float: left;        /* moves left side to the left */
     width: 40%;
 }
 
 .right {
-    float: right;
+    float: right;       /* moves right side to the right */
     width: 60%;
 }
 
