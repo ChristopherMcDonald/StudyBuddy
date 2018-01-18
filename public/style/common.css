@@ -234,6 +234,7 @@ footer > p {
     footer > p {
         clear: both;
         display: block;
+        width: 100%;
         text-align: center;
     }
 }

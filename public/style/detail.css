@@ -12,8 +12,6 @@
 
 .item {
     background-color: #999;
-    /* height: 30vh; */
-    width: 60vw;
     display: inline-block;
     margin-bottom: 10px;
     padding: 10px;
@@ -107,4 +105,23 @@ button {
     font-family: 'Open Sans';
     font-size: 1em;
     display: inline-block;
+}
+
+@media only screen and (max-width: 425px) {
+
+    .main {
+        padding: 20% 0;
+    }
+
+    .main > div {
+        margin: 0 5vw;
+    }
+
+    .img {
+        height: 20vh;
+    }
+
+    .detail .pull-left {
+        margin-left: 0;
+    }
 }

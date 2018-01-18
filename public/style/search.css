@@ -21,7 +21,7 @@ footer {
 }
 
 .form {
-    padding: 0 40%;
+    padding: 0 30%;
     padding-bottom: 15%;
 }
 
@@ -83,4 +83,15 @@ input[type="range"] {
 
 label[for="coffee-y"] {
     margin-right: 10px;
+}
+
+@media only screen and (max-width: 425px) {
+    .main > h1 {
+        padding-top: 30%;
+    }
+
+    .form {
+        padding: 0 15%;
+        padding-bottom: 40%;
+    }
 }
