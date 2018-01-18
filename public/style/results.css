@@ -116,6 +116,7 @@ button {
 
 .map > iframe {
     display: inline-block;
+    border: none;
 }
 
 
