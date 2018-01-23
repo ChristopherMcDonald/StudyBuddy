@@ -85,7 +85,7 @@ label[for="coffee-y"] {
     margin-right: 10px;
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 768px) {
     .main > h1 {
         padding-top: 30%;
     }

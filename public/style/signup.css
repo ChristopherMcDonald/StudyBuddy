@@ -20,7 +20,7 @@ footer {
 }
 
 .form {
-    padding: 0 40%;
+    padding: 0 30%;
     padding-bottom: 15%;
 }
 
@@ -61,7 +61,7 @@ input:focus {
     color: black;
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 768px) {
     .main > h1 {
         padding-top: 30%;
     }

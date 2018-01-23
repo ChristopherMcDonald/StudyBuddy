@@ -107,6 +107,14 @@ button {
     display: inline-block;
 }
 
+@media only screen and (max-width: 768px) {
+
+    .main > div {
+        margin-top: 10%;
+    }
+
+}
+
 @media only screen and (max-width: 425px) {
 
     .main {

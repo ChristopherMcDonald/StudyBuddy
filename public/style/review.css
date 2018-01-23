@@ -14,7 +14,7 @@
 }
 
 .form {
-    padding: 0 40%;
+    padding: 0 30%;
     padding-bottom: 15%;
 }
 
@@ -78,9 +78,9 @@ label[for="coffee-y"] {
     margin-right: 10px;
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 768px) {
     .main > h1 {
-        padding-top: 30%;
+        padding-top: 25%;
     }
 
     .form {
