@@ -167,6 +167,36 @@ footer > p {
     border: 1px solid red;
 }
 
+#error-disp {
+    position: fixed;
+    top: -8vh;
+    left: 0;
+    width: 100vw;
+    background-color: red;
+    z-index: 100;
+    display: inline-block;
+}
+
+#error-disp > p {
+    line-height: 8vh;
+    font-family: 'Quicksand';
+    font-size: 1.5em;
+    color: white;
+    padding-left: 1%;
+    display: inline-block;
+}
+
+#error-disp > i {
+    line-height: 8vh;
+    font-size: 1.5em;
+    color: white;
+    padding-left: 2%;
+}
+
+#error-disp > i:hover {
+    color: #888;
+}
+
 @media only screen and (max-width: 768px) {
 
     .dropdown {

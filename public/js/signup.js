@@ -20,6 +20,7 @@ validate = (ev) => {
 
     // test email validity
     if(!emailReg.test(email)) {
+        displayError("Oops! The email doesn't look quite right...");
         return false;
     } else {
         console.log("Email is good!");
@@ -30,6 +31,7 @@ validate = (ev) => {
 
     // test postal validity
     if(!postalReg.test(postal)) {
+        displayError("Oops! The postal code doesn't look quite right...");
         return false;
     } else {
         console.log("Postal is good!");
@@ -40,12 +42,14 @@ validate = (ev) => {
 
     // test both passwords
     if(!passReg.test(pass)) {
+        displayError("Oops! Your password should be 6 characters and have 1 letter and number.");
         return false;
     } else {
         console.log("Pass is good!");
     }
 
     if(!passReg.test(cpass)) {
+        displayError("Oops! Your password should be 6 characters and have 1 letter and number.");
         return false;
     } else {
         console.log("Conf-Pass is good!");
@@ -53,6 +57,7 @@ validate = (ev) => {
 
     // ensure passwords are identical
     if(pass !== cpass) {
+        displayError("Oops! Your passwords don't match!");
         return false;
     } else {
         console.log("PASSes are good!");

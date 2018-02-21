@@ -16,6 +16,7 @@ validate = (ev) => {
     // regex for checking postal codes, only allows form: A1A1A1
     var postalReg = /([A-Z][0-9][A-Z][0-9][A-Z][0-9])/;
     if(!postalReg.test(postal)) {
+        displayError("Ensure the postal code follows the form: A1A1A1");
         return false;
     } else {
         console.log("Postal is good!");

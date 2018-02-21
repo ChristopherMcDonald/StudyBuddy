@@ -80,7 +80,9 @@
                 <input type="button" class="submit near-me" value="Find Near Me" onclick="findNearMe();">
             </form>
         </div><!--.main-->
-
+        <div id="error-disp">
+            <i class="fa fa-times" onclick="hideError();"></i><p> Some ERROR </p>
+        </div><!--.error-disp-->
         <footer>
             <p>Built by: Christopher McDonald</p>
             <p class="pull-right">Contact:
@@ -89,4 +91,5 @@
         </footer>
     </body>
     <script src="../js/search.js"> </script>
+    <script src="../js/global.js"></script>
 </html>

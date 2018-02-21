@@ -146,7 +146,9 @@
                 </div><!--.map-->
             </div>
         </div><!--.main-->
-
+        <div id="error-disp">
+            <i class="fa fa-times" onclick="hideError();"></i><p> Some ERROR </p>
+        </div><!--.error-disp-->
         <footer>
             <p>Built by: Christopher McDonald</p>
             <p class="pull-right">Contact:
@@ -155,6 +157,7 @@
         </footer>
     </body>
     <script src="../js/results.js"></script>
+    <script src="../js/global.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAj6W1p_IKsLfigZ805LdoyrYWcj6samY&callback=initMap">
     </script>
