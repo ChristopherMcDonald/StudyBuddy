@@ -53,8 +53,10 @@
                     </div>
 
                     <div class="detail pull-left">
-                        <a href="/static/detail.html" class="pull-left">Apple Cafe</a><br>
-                        <p class="pull-left">453 Apple St, W</p>
+                        <a href="/static/detail.html" class="pull-left">Cannon Coffee Co.</a><br>
+                        <p class="pull-left">179 Ottawa St N</p>
+                        <p class="pull-left">Hamilton, ON</p>
+                        <p class="pull-left">L8H 3Z4</p>
                     </div>
 
                     <div class="detail pull-right">
@@ -82,10 +84,10 @@
                     </div>
 
                     <div class="detail pull-left">
-                        <a href="/static/detail.html" class="pull-left">McMaster U Library</a><br>
+                        <a href="/static/detail.html" class="pull-left">McMaster University Library</a><br>
                         <p class="pull-left">1280 Main St W</p><br>
                         <p class="pull-left">Hamilton ON</p><br>
-                        <p class="pull-left">N0B 2K0</p>
+                        <p class="pull-left">L8S 1B1</p>
                     </div>
 
                     <div class="detail pull-right">
@@ -115,8 +117,10 @@
                     </div>
 
                     <div class="detail pull-left">
-                        <a href="/static/detail.html" class="pull-left">Hamilton Public Lib</a><br>
-                        <p class="pull-left">123 Some St S</p>
+                        <a href="/static/detail.html" class="pull-left">Hamilton Public Library</a><br>
+                        <p class="pull-left">55 York Blvd</p><br>
+                        <p class="pull-left">Hamilton ON</p><br>
+                        <p class="pull-left">L8P 1K1</p>
                     </div>
 
                     <div class="detail pull-right">
@@ -136,9 +140,11 @@
                     </div>
                 </div><!--.item-->
             </div><!--.tab-->
-            <div class="map">
-                <iframe width="600" height="450" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=9&center=43.2557%2C-79.8711&key=AIzaSyB_SLA-Xo3Pl-dUmySemEUcIKokkdI61K0" allowfullscreen></iframe>
-            </div><!--.map-->
+            <div class="map-wrap">
+                <div id="map">
+                    <!-- <iframe width="600" height="450" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=9&center=43.2557%2C-79.8711&key=AIzaSyB_SLA-Xo3Pl-dUmySemEUcIKokkdI61K0" allowfullscreen></iframe> -->
+                </div><!--.map-->
+            </div>
         </div><!--.main-->
 
         <footer>
@@ -148,4 +154,59 @@
             </p>
         </footer>
     </body>
+    <script>
+      function initMap() {
+        var cannon = {lat: 43.247664, lng: -79.817814};
+        var mcmaster = {lat: 43.260806, lng: -79.920407};
+        var lib = {lat: 43.258935, lng: -79.870521};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: cannon
+        });
+
+        var marker1 = new google.maps.Marker({
+          position: cannon,
+          map: map,
+          title: 'Cannon Coffee Co.'
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+            content: '<div id="content"><a href="/static/detail.html">Cannon Coffee Co.</a><p>179 Ottawa St N</p><p>Hamilton, ON</p><p class="pull-left">L8H 3Z4</p></div>'
+        });
+
+        marker1.addListener('click', function() {
+            infowindow.open(map, marker1);
+        });
+
+        var marker2 = new google.maps.Marker({
+          position: mcmaster,
+          map: map
+        });
+
+        var infowindow2 = new google.maps.InfoWindow({
+            content: '<div id="content"><a href="/static/detail.html">McMaster University Library</a><p>1280 Main St W</p><p>Hamilton, ON</p><p class="pull-left">L8S 1B1</p></div>'
+        });
+
+        marker2.addListener('click', function() {
+            infowindow2.open(map, marker2);
+        });
+
+        var marker3 = new google.maps.Marker({
+          position: lib,
+          map: map
+        });
+
+        var infowindow3 = new google.maps.InfoWindow({
+            content: '<div id="content"><a href="/static/detail.html">Hamilton Public Library</a><p>55 York Blvd</p><p>Hamilton, ON</p><p class="pull-left">L8P 1K1</p></div>'
+        });
+
+        marker3.addListener('click', function() {
+            infowindow3.open(map, marker3);
+        });
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAj6W1p_IKsLfigZ805LdoyrYWcj6samY&callback=initMap">
+    </script>
 </html>

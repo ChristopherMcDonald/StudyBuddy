@@ -62,6 +62,10 @@ input:focus {
     color: black;
 }
 
+.near-me {
+    background-color: #e67e22;
+}
+
 input[type="radio"] {
     width: auto;
 }

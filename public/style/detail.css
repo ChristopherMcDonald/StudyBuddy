@@ -107,6 +107,13 @@ button {
     display: inline-block;
 }
 
+#map {
+    clear: both;
+    width: 40vw;
+    height: 30vh;
+    margin: 0 auto;
+}
+
 @media only screen and (max-width: 768px) {
 
     .main > div {

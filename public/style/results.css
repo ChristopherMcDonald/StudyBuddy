@@ -109,15 +109,16 @@ button {
     background-color: white !important;
 }
 
-.map {
-    width: 100%;
-    text-align: center;
+#map {
+    width: 50vw;
+    height: 50vh;
+    margin: 0 25vw;
 }
-
+/*
 .map > iframe {
     display: inline-block;
     border: none;
-}
+} */
 
 @media only screen and (max-width: 768px) {
 
@@ -149,8 +150,8 @@ button {
         margin-bottom: 30px;
     }
 
-    .map > iframe {
+    /* .map > iframe {
         width: 90%;
         padding: 0 5%;
-    }
+    } */
 }

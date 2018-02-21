@@ -21,6 +21,9 @@
         <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+        <!-- jQuery CDN -->
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="header">
@@ -74,6 +77,7 @@
                 </div><br>
 
                 <input type="submit" class="submit">
+                <input type="button" class="submit near-me" value="Find Near Me" onclick="findNearMe();">
             </form>
         </div><!--.main-->
 
@@ -84,4 +88,31 @@
             </p>
         </footer>
     </body>
+    <script>
+    window.onload = () => {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            var req = "https://maps.googleapis.com/maps/api/geocode/json?" + "latlng=" + pos.coords.latitude + "," + pos.coords.longitude + "&sensor=true&key=AIzaSyDAj6W1p_IKsLfigZ805LdoyrYWcj6samY";
+
+            $.get(req, {}, (data) => {
+                var post = data.results[0].address_components.filter(item => item.types.includes("postal_code"))[0].long_name
+.replace(/\s/g, '');
+                $(".form-entry > input[name='postal']").val(post);
+                });
+            }
+        );
+    }
+
+    findNearMe = () => {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            var req = "https://maps.googleapis.com/maps/api/geocode/json?" + "latlng=" + pos.coords.latitude + "," + pos.coords.longitude + "&sensor=true&key=AIzaSyDAj6W1p_IKsLfigZ805LdoyrYWcj6samY";
+
+            $.get(req, {}, (data) => {
+                var post = data.results[0].address_components.filter(item => item.types.includes("postal_code"))[0].long_name
+.replace(/\s/g, '');
+                window.location.href = "/static/results.html?postal=" + post;
+                });
+            }
+        );
+    }
+    </script>
 </html>
