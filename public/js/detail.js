@@ -30,3 +30,20 @@ initMap = () => {
         cannonInfo.open(map, cannonMarker);
     });
 }
+
+var imgs = [
+    "../img/coffee.jpg",
+    "../img/coffee-2.jpg",
+    "../img/coffee-3.jpg"
+];
+
+/**
+ * [switchImage switches the image in #img]
+ * @param  {[String]} dir [left or right]
+ * @return {[none]}
+ */
+switchImage = (dir) => {
+    console.log("ss");
+    var index = imgs.indexOf($(".img > img").attr("src"));
+    $(".img > img").attr("src", (dir == "right") ? imgs[(index + 1 + imgs.length) % imgs.length] : imgs[(index - 1 + imgs.length) % imgs.length]);
+}

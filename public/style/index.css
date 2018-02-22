@@ -2,10 +2,6 @@
     background-color: rgba(0,0,0,0);
 }
 
-.nav > li > a, .name > a {
-    color: white !important;
-} 
-
 .splash {
     width: 100vw;
     height: 100vh;
@@ -67,10 +63,26 @@ form button {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 768px) {
+
+    .nav > li > a {
+        color: white;
+    }
+
+    .nav > li > a:hover {
+        color: #666;
+    }
+
     form {
         width: 70%;
         display: inline-block;
         position: relative;
     }
+
+}
+
+@media only screen and (max-width: 425px) {
+
+
+
 }

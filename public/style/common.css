@@ -100,8 +100,7 @@ Color Scheme (credit: http://www.awwwards.com/sites/grosse-lanterne-1/):
 }
 
 .name > a:hover {
-    cursor: pointer;
-    color: #5CDB95;
+    color: white;
 }
 
 .nav {
@@ -243,6 +242,10 @@ footer > p {
         color: #666;
         cursor: pointer;
     }
+
+    .nav > li > a {
+        color: white;
+    } 
 
     .hide-it {
         display: block !important;

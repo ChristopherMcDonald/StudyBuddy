@@ -7,14 +7,13 @@
 }
 
 .main > div {
-    margin: 0 20vw;
+    margin: 0 15vw;
 }
 
 .item {
     background-color: #999;
     display: inline-block;
     margin-bottom: 10px;
-    padding: 10px;
     border-radius: 5px;
     position: relative;
 }
@@ -26,31 +25,58 @@
 }
 
 .img {
-    height: 30vh;
     margin-bottom: 2%;
+    display: inline-block;
+    position: relative;
 }
 
 .img > img {
-    width: auto;
+    width: 100%;
+    height: auto;
+}
+
+.right-switch {
+    right: 0;
+}
+
+.right-switch > i {
+    right: 15%;
+}
+
+.left-switch {
+    left: 0;
+}
+
+.left-switch > i {
+    left: 15%;
+}
+
+.switch {
     height: 100%;
+    position: absolute;
+    top: 0;
+    width: 10%;
+    text-align: center;
+}
+
+.switch > i {
+    position: absolute;
+    top: 45%;
+    color: white;
+}
+
+.switch > i:hover {
+    color: #666;
 }
 
 .detail {
-    margin-right: 5%;
+    margin: 0 5%;
 }
 
-.detail > a {
-    text-decoration: none;
-}
-
-.detail > a:hover {
-    color: #05386B;
-}
-
-.detail p, .detail i, .detail a {
+.detail p, .detail i {
     color: white;
     padding-bottom: 10px;
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 .detail p, .detail a {
@@ -60,10 +86,6 @@
 .wifis {
     width: 100%;
     text-align: right;
-}
-
-.detail .pull-left {
-    margin-left: 10px;
 }
 
 .bottom-right {
@@ -89,6 +111,10 @@ button {
     padding: 5%;
 }
 
+.comment > .pull-left {
+    margin-left: 0;
+}
+
 .comments > h2 {
     color: white;
     font-family: 'Open Sans';
@@ -108,6 +134,7 @@ button {
 }
 
 #map {
+    margin-top: 10%;
     clear: both;
     width: 40vw;
     height: 30vh;
@@ -118,6 +145,18 @@ button {
 
     .main > div {
         margin-top: 10%;
+    }
+
+    #map {
+        width: 60vw;
+    }
+
+    .detail .pull-right > p, .detail .pull-right > i  {
+        float: left;
+    }
+
+    .detail .pull-right {
+        float: left;
     }
 
 }
@@ -134,9 +173,5 @@ button {
 
     .img {
         height: 20vh;
-    }
-
-    .detail .pull-left {
-        margin-left: 0;
     }
 }
