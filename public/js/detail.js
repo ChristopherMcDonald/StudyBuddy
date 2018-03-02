@@ -33,8 +33,8 @@ initMap = () => {
 
 var imgs = [
     "../img/coffee.jpg",
-    "../img/coffee-2.jpg",
-    "../img/coffee-3.jpg"
+    "../img/coffee-3.jpg",
+    "../img/coffee-4.jpeg"
 ];
 
 /**

@@ -44,11 +44,12 @@
             </div><!--.right-->
         </div><!--.header-->
         <div class="main">
-            <div class="options">
-                <button class="active-btn">Tabular View</button>
-                <button class="btn">Map View</button>
-            </div><!--.options-->
             <br>
+            <div class="map-wrap">
+                <div id="map">
+                    <!-- <iframe width="600" height="450" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=9&center=43.2557%2C-79.8711&key=AIzaSyB_SLA-Xo3Pl-dUmySemEUcIKokkdI61K0" allowfullscreen></iframe> -->
+                </div><!--.map-->
+            </div>
             <div class="tab">
                 <div class="item">
                     <div class="img pull-left">
@@ -56,10 +57,10 @@
                     </div>
 
                     <div class="detail pull-left">
-                        <a href="/static/detail.html" class="pull-left">Cannon Coffee Co.</a><br>
-                        <p class="pull-left">179 Ottawa St N</p>
-                        <p class="pull-left">Hamilton, ON</p>
-                        <p class="pull-left">L8H 3Z4</p>
+                        <a href="/static/detail.html">Cannon Coffee Co.</a>
+                        <p class="">179 Ottawa St N</p>
+                        <p class="">Hamilton, ON</p>
+                        <p class="">L8H 3Z4</p>
                     </div>
 
                     <div class="detail pull-right">
@@ -76,9 +77,6 @@
                         <!-- Only visible in text-based browsers / screen readers -->
                         <span class="sr-only">Wifi Rating: 3/5</span>
                     </div>
-                    <div class="bottom-right">
-                        <button class="review-btn">Review</button>
-                    </div>
                 </div><!--.item-->
 
                 <div class="item">
@@ -87,10 +85,10 @@
                     </div>
 
                     <div class="detail pull-left">
-                        <a href="/static/detail.html" class="pull-left">McMaster University Library</a><br>
-                        <p class="pull-left">1280 Main St W</p><br>
-                        <p class="pull-left">Hamilton ON</p><br>
-                        <p class="pull-left">L8S 1B1</p>
+                        <a href="/static/detail.html" class="">McMaster University Library</a>
+                        <p class="">1280 Main St W</p>
+                        <p class="">Hamilton ON</p>
+                        <p class="">L8S 1B1</p>
                     </div>
 
                     <div class="detail pull-right">
@@ -109,9 +107,6 @@
                         <!-- Only visible in text-based browsers / screen readers -->
                         <span class="sr-only">Wifi Rating: 5/5</span>
                     </div>
-                    <div class="bottom-right">
-                        <button class="review-btn">Review</button>
-                    </div>
                 </div><!--.item-->
 
                 <div class="item">
@@ -120,10 +115,10 @@
                     </div>
 
                     <div class="detail pull-left">
-                        <a href="/static/detail.html" class="pull-left">Hamilton Public Library</a><br>
-                        <p class="pull-left">55 York Blvd</p><br>
-                        <p class="pull-left">Hamilton ON</p><br>
-                        <p class="pull-left">L8P 1K1</p>
+                        <a href="/static/detail.html" class="">Hamilton Public Library</a>
+                        <p class="">55 York Blvd</p>
+                        <p class="">Hamilton ON</p>
+                        <p class="">L8P 1K1</p>
                     </div>
 
                     <div class="detail pull-right">
@@ -138,16 +133,8 @@
                         <!-- Only visible in text-based browsers / screen readers -->
                         <span class="sr-only">Wifi Rating: 1/5</span>
                     </div>
-                    <div class="bottom-right">
-                        <button class="review-btn">Review</button>
-                    </div>
                 </div><!--.item-->
             </div><!--.tab-->
-            <div class="map-wrap">
-                <div id="map">
-                    <!-- <iframe width="600" height="450" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=9&center=43.2557%2C-79.8711&key=AIzaSyB_SLA-Xo3Pl-dUmySemEUcIKokkdI61K0" allowfullscreen></iframe> -->
-                </div><!--.map-->
-            </div>
         </div><!--.main-->
         <div id="error-disp">
             <i class="fa fa-times" onclick="hideError();"></i><p> Some ERROR </p>

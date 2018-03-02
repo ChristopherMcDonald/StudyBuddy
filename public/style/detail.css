@@ -3,7 +3,7 @@
     display: inline-block;
     background-color: #05386B;
     padding-bottom: 1%;
-    padding-top: 10%;
+    padding-top: 5%;
 }
 
 .main > div {
@@ -137,7 +137,7 @@ button {
     margin-top: 10%;
     clear: both;
     width: 40vw;
-    height: 30vh;
+    height: 50vh;
     margin: 0 auto;
 }
 
