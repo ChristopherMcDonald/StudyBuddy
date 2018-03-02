@@ -49,5 +49,5 @@ findNearMe = () => {
                 displayError("Woah! We had some trouble getting your location, please fill in the field manually and click 'Search'!");
                 console.error("Could not access Google Maps API for Postal Code");
             });
-    };
+    });
 }
