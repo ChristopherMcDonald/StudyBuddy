@@ -161,6 +161,11 @@ button {
 
 }
 
+.google-mark a, .google-mark p {
+    color: black;
+    font-size: 1em;
+}
+
 @media only screen and (max-width: 425px) {
 
     .main {
