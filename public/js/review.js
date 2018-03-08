@@ -18,8 +18,6 @@ validate = (ev) => {
     if(!postalReg.test(postal)) {
         displayError("Ensure the postal code follows the form: A1A1A1");
         return false;
-    } else {
-        console.log("Postal is good!");
     }
 
     // pull the rest of data from form using input's name
@@ -27,8 +25,28 @@ validate = (ev) => {
     var coffee = $(".form-entry > input[name='coffee']").val();
     var rating = $(".form-entry > input[name='rating']").val();
 
+    var fd = new FormData();
+    var file_data = $('.form-entry > input[type=\'file\']')[0].files;
+    fd.append("files", file_data);
+    fd.append("name", name);
+    fd.append("address", address);
+    fd.append("city", city);
+    fd.append("postal", postal);
+    fd.append("wifi", wifi);
+    fd.append("coffee", coffee == "YES" ? 1 : 0);
+    fd.append("rating", rating);
 
-    // TODO deal with images
-    // TODO run ajax
-
+    $.ajax({
+        url: "../scripts/detailSubmission.php",
+        data: new FormData($("form")[0]),
+        processData: false,
+        contentType: false,
+        type: "POST",
+        success: data => {
+            console.log(data);
+        },
+        error: data => {
+            console.log(data);
+        }
+    });
 };

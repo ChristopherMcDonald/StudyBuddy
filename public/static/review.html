@@ -45,7 +45,7 @@
         </div><!--.header-->
         <div class="main">
             <h1 class="title">Found a Study Space?</h1><br><br>
-            <form class="form" action="POST" onsubmit="validate(event);">
+            <form class="form" action="POST"  onsubmit="validate(event);" action="/scripts/detailSubmission.php">
                 <div class="form-entry">
                     <label for="name">Name</label><br>
                     <input type="text" name="name" id="name" required minlength="2">
@@ -85,8 +85,8 @@
                 </div><br>
 
                 <div class="form-entry">
-                    <label for="image">Have any photos?</label><br>
-                    <input type="file" id="image" multiple>
+                    <label for="image">Have a photo?</label><br>
+                    <input name="images" type="file" id="image" multiple accept="image/x-png, image/gif, image/jpeg, image/jpg">
                 </div><br>
 
                 <input type="submit" class="submit">

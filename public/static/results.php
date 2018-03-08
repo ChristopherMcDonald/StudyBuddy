@@ -46,56 +46,47 @@
         <div class="main">
             <br>
             <div class="map-wrap">
-                <div id="map">
-                    <!-- <iframe width="600" height="450" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=9&center=43.2557%2C-79.8711&key=AIzaSyB_SLA-Xo3Pl-dUmySemEUcIKokkdI61K0" allowfullscreen></iframe> -->
-                </div><!--.map-->
+                <div id="map"></div><!--.map-->
             </div>
             <div class="tab">
                 <?php
                 include 'creds.php';
-                $conn = new mysqli($serv, $user, $pass, $name);
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
+
+                $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $sql = "SELECT s.id, s.name, s.address, s.city, s.postal, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId GROUP BY r.id";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
 
-                        $sql2 = "SELECT si.* from SpaceImages si JOIN Reviews r ON si.reviewId = r.id JOIN Spaces s ON s.id = r.spaceId WHERE s.id = ".$row['id']." LIMIT 1;";
-                        $result2 = $conn->query($sql2);
+                foreach($conn->query($sql) as $row) {
+                    $sql2 = "SELECT si.* from SpaceImages si JOIN Reviews r ON si.reviewId = r.id JOIN Spaces s ON s.id = r.spaceId WHERE s.id = ".$row['id']." LIMIT 1;";
 
-                        if ($result2->num_rows > 0) {
-                            $row2 = $result2->fetch_assoc();
-                            echo '<div class="item"><div class="img pull-left"><img src="'.$row2["imgLink"].'" alt="'.$row2["alt"].'"></div>';
-                        } else {
-                            echo '<div class="item"><div class="img pull-left"><img src="../img/coffee.jpg" alt="Sample Image"></div>';
-                        }
-                        echo '<div class="detail pull-left"><a href="/static/detail.html?id='.$row["id"].'">'.$row['name'].'</a>';
-                        echo '<p class="">'.$row['address'].'</p>';
-                        echo '<p class="">'.$row['city'].'</p>';
-                        echo '<p class="">'.$row['postal'].'</p></div>';
-                        echo '<div class="detail pull-right">';
-                        echo '<p class="pull-right">Overall: '.floor($row['avgRate']).'/5</p><br>';
-                        echo '<!-- coffee Count is '.$row["coffeeCount"].' -->';
-                        if($row["coffeeCount"] > 0) {
-                            echo '<i class="fa fa-coffee pull-right" aria-hidden="true"></i><br>';
-                            echo '<span class="sr-only">This place has coffee!</span>';
-                        }
-                        echo '<div class="wifis pull-right">';
-                        for($i = 0; $i < floor($row["avgWifi"]); $i++) {
-                            echo '<i class="fa fa-wifi" aria-hidden="true"></i>';
-                        }
-                        echo '</div>';
-                        echo '<span class="sr-only">Wifi Rating: '.floor($row["avgWifi"]).'/5</span></div>
-                        </div><!--.item-->';
+                    $rows = $conn->query($sql2)->fetchAll();
+
+                    if (sizeof($rows) > 0) {
+                        $row2 = $rows[0];
+                        echo '<div class="item"><div class="img pull-left"><img src="'.$row2["imgLink"].'" alt="'.$row2["alt"].'"></div>';
+                    } else {
+                        echo '<div class="item"><div class="img pull-left"><img src="../img/coffee.jpg" alt="Sample Image"></div>';
                     }
-                } else {
-                    // TODO something neat!
-                    echo "0 results";
+
+                    echo '<div class="detail pull-left"><a href="/static/detail.html?id='.$row["id"].'">'.$row['name'].'</a>';
+                    echo '<p class="">'.$row['address'].'</p>';
+                    echo '<p class="">'.$row['city'].'</p>';
+                    echo '<p class="">'.$row['postal'].'</p></div>';
+                    echo '<div class="detail pull-right">';
+                    echo '<p class="pull-right">Overall: '.floor($row['avgRate']).'/5</p><br>';
+                    echo '<!-- coffee Count is '.$row["coffeeCount"].' -->';
+                    if($row["coffeeCount"] > 0) {
+                        echo '<i class="fa fa-coffee pull-right" aria-hidden="true"></i><br>';
+                        echo '<span class="sr-only">This place has coffee!</span>';
+                    }
+                    echo '<div class="wifis pull-right">';
+                    for($i = 0; $i < floor($row["avgWifi"]); $i++) {
+                        echo '<i class="fa fa-wifi" aria-hidden="true"></i>';
+                    }
+                    echo '</div>';
+                    echo '<span class="sr-only">Wifi Rating: '.floor($row["avgWifi"]).'/5</span></div>
+                    </div><!--.item-->';
                 }
                 ?>
             </div><!--.tab-->
@@ -118,28 +109,25 @@
     initMap = () => {
         <?php
         include 'creds.php';
-        $conn = new mysqli($serv, $user, $pass, $name);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "SELECT s.id, s.name, s.address, s.city, s.postal FROM Spaces s;";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            // output data of each row
+        $rows = $conn->query($sql)->fetchAll();
+        $row_cnt = sizeof($rows);
+
+        if($row_cnt > 0) {
             echo 'var list = [';
-            $row_cnt = $result->num_rows;
             for($j = 0; $j < $row_cnt - 1; $j++) {
-                $row = $result->fetch_assoc();
+                $row = $rows[$j];
 
                 echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"},';
             }
-            $row = $result->fetch_assoc();
 
+            $row = end($rows);
             echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"}];';
         } else {
-            echo 'var list = [];';
+            echo "var list = [];";
         }
         ?>
         // build map object with Google Maps API

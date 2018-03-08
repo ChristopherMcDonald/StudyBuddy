@@ -5,11 +5,6 @@ VALUES
 
 
 INSERT INTO
-Spaces (name, address, city, postal)
-VALUES
-("Cafe Oranje", "123 Apple Way", "Hamilton", "N0B2K0");
-
-INSERT INTO
 Reviews (userId, spaceId, coffee, rating, wifi)
 VALUES
 (1,1,1,5,5);

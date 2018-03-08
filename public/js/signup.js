@@ -60,8 +60,17 @@ validate = (ev) => {
         displayError("Oops! Your passwords don't match!");
         return false;
     } else {
-        console.log("PASSes are good!");
+        console.log("Passes are good!");
     }
 
-    // TODO run ajax
+    $.post("../scripts/userSubmission.php", {
+        first: fname,
+        last: lname,
+        email: email,
+        postal: postal,
+        pass: pass,
+        conf: cpass
+    }).then(data => {
+        console.log(data);
+    });
 };

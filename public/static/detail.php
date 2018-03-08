@@ -26,58 +26,32 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="header">
-            <div class="left">
-                <div class="name">
-                    <a href="/">StudyBuddy</a>
-                </div><!--.name-->
-            </div><!--.left-->
-            <div class="right">
-                <i class="fa fa-bars hide-it" aria-hidden="true"></i>
-                <div class="dropdown">
-                        <ul class="nav">
-                            <li><a href="/static/search.html">Custom Search</a></li>
-                            <li><a href="/static/review.html">Review</a></li>
-                            <li><a href="/static/signup.html">Sign Up</a></li>
-                        </ul><!--.nav-->
-                </div><!--.dropdown-->
-            </div><!--.right-->
-        </div><!--.header-->
+        <?php
+        include 'creds.php';
+        getNav();
+        ?>
         <div class="main">
 
             <div class="item">
                 <!-- item consists of img on top, and two detail divs below it -->
                 <?php
-                include 'creds.php';
-
                 $id = $_GET["id"];
 
-                $conn = new mysqli($serv, $user, $pass, $name);
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
+                $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $sql = "SELECT s.id, s.name, s.address, s.city, s.postal, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId WHERE s.id = ". $id . " GROUP BY s.id;";
-                $result = $conn->query($sql);
 
-                if ($result->num_rows == 1) {
-                    $row = $result->fetch_assoc();
-
+                foreach($conn->query($sql) as $row) {
                     $sql2 = "SELECT si.* from SpaceImages si JOIN Reviews r ON si.reviewId = r.id JOIN Spaces s ON s.id = r.spaceId WHERE s.id = ".$row['id']." LIMIT 1;";
-                    $result2 = $conn->query($sql2);
 
-                    if ($result2->num_rows > 0) {
-                        $row2 = $result2->fetch_assoc();
+                    foreach($conn->query($sql2) as $row2) {
                         echo '<div class="img"><img src="'.$row2["imgLink"].'" alt="'.$row2["alt"].'"><div class="right-switch switch">
                             <i class="fa fa-3x fa-chevron-right" onclick="switchImage(\'right\');"></i>
                         </div>
                         <div class="left-switch switch">
                             <i class="fa fa-3x fa-chevron-left" onclick="switchImage(\'left\');"></i>
                         </div></div>';
-                    } else {
-                        // TODO handle
-                        echo 'PROBLEM';
                     }
 
                     echo '<div class="detail pull-left">';
@@ -97,12 +71,10 @@
                         echo '<i class="fa fa-wifi" aria-hidden="true"></i>';
                     }
                     echo '</div>';
-                    echo '<span class="sr-only">Wifi Rating: '.$row["avgWifi"].'/5</span>';
+                    echo '<span class="sr-only">Wifi Rating: '.floor($row["avgWifi"]).'/5</span>';
                     echo '</div><br><br>';
                 }
                 ?>
-
-
 
                 <div id="map"></div>
 
@@ -182,29 +154,25 @@
      */
     initMap = () => {
         <?php
-        include 'creds.php';
-        $conn = new mysqli($serv, $user, $pass, $name);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT s.id, s.name, s.address, s.city, s.postal FROM Spaces s WHERE s.id = " . $_GET["id"] .";";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            // output data of each row
+        $sql = "SELECT s.id, s.name, s.address, s.city, s.postal FROM Spaces s WHERE s.id = ". $_GET["id"] . ";";
+        $rows = $conn->query($sql)->fetchAll();
+        $row_cnt = sizeof($rows);
+
+        if($row_cnt > 0) {
             echo 'var list = [';
-            $row_cnt = $result->num_rows;
             for($j = 0; $j < $row_cnt - 1; $j++) {
-                $row = $result->fetch_assoc();
+                $row = $rows[$j];
 
                 echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"},';
             }
-            $row = $result->fetch_assoc();
 
+            $row = end($rows);
             echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"}];';
         } else {
-            echo 'var list = [];';
+            echo "var list = [];";
         }
         ?>
         // build map object with Google Maps API
@@ -232,31 +200,27 @@
     }
 
     <?php
-    include 'creds.php';
-    $conn = new mysqli($serv, $user, $pass, $name);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = "SELECT si.imgLink FROM Spaces s JOIN Reviews r ON s.id = r.spaceId JOIN SpaceImages si ON si.reviewId = r.id WHERE s.id = " . $_GET["id"] .";";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
+
+    $rows = $conn->query($sql)->fetchAll();
+    $row_cnt = sizeof($rows);
+
+    if($row_cnt > 0) {
         echo 'var imgs = [';
 
-        $row_cnt = $result->num_rows;
         for($j = 0; $j < $row_cnt - 1; $j++) {
-            $row = $result->fetch_assoc();
+            $row = $rows[$j];
 
             echo '"'. $row["imgLink"] .'",';
         }
-        $row = $result->fetch_assoc();
 
-        echo '"'. $row["imgLink"] .'"';
+        echo '"'. end($rows)["imgLink"] .'"];';
     } else {
-        echo '"../img/coffee.jpg"';
+        echo 'var imgs = ["../img/coffee.jpg"];';
     }
-    echo '];'
     ?>
 
     /**
