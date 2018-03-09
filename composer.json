@@ -1,5 +1,6 @@
 {
     "require": {
-        "aws/aws-sdk-php": "^3.52"
+        "aws/aws-sdk-php": "^3.52",
+        "firebase/php-jwt": "^5.0"
     }
 }

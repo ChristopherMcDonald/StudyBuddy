@@ -45,22 +45,34 @@ form {
     display: inline-block;
     position: relative;
 }
-form input {
-    padding-right: 4.6em;
+
+.index-search-form > label {
+    font-family: 'Open Sans';
+    color: white;
+    font-size: 1.3em;
+    width: 100%;
+    margin-bottom: 1%;
 }
-form button {
-    position: absolute;
-    top: 0;
-    right: -5px;
-    font-size: 1.6em;
-    padding-right: 0;
-    margin-right: 0;
-    color: #555;
-    outline: none;
-    background-color: Transparent;
-    background-repeat: no-repeat;
+
+.index-search-form > input {
+
+    margin-bottom: 2%;
+}
+
+.index-search-form {
+    text-align: left;
+}
+
+.submit {
+    width: 40%;
+    font-size: 1em;
+    background-color: #5CDB95;
     border: none;
-    cursor: pointer;
+    color: black;
+    border-radius: 6px;
+    font-family: 'Open Sans';
+    text-align: center;
+    display: inline-block;
 }
 
 @media only screen and (max-width: 768px) {

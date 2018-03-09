@@ -21,6 +21,21 @@ if($coffeeDiff == 0) {
     $coffeeBool = 0;
 }
 
+if(strlen($name) == 0 || strlen($address) == 0 || strlen($city) == 0) {
+    $unencodedArray = ['resp' => 'invalid'];
+    echo json_encode($unencodedArray);
+    return;
+}
+
+$postalExpression = '/^([a-zA-Z]\d[a-zA-Z])\ {0,1}(\d[a-zA-Z]\d)$/';
+$postalValid = (bool)preg_match($postalExpression, $postal);
+
+if(!$postalValid) {
+    $unencodedArray = ['resp' => 'invalid'];
+    echo json_encode($unencodedArray);
+    return;
+}
+
 $rating =   $_POST["rating"];
 $files =    $_FILES['images'];
 

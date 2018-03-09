@@ -71,6 +71,11 @@ validate = (ev) => {
         pass: pass,
         conf: cpass
     }).then(data => {
-        console.log(data);
+        ret = JSON.parse(data);
+        if(ret.resp == "valid") {
+            window.location.href = "/";
+        } else {
+            displayError("Something went wrong... Please reload and try again.");
+        }
     });
 };
