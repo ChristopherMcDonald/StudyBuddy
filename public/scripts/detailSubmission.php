@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../static/creds.php';
 require '../../vendor/autoload.php';
 use Aws\S3\S3Client;
@@ -8,12 +9,20 @@ $credentials = new Aws\Credentials\Credentials($apikey,$secret);
 $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+$id = $_SESSION["id"];
+if(!$id) {
+    $unencodedArray = ['resp' => 'invalid'];
+    echo json_encode($unencodedArray);
+    return;
+}
+
 $name =     $_POST["name"];
 $address =  $_POST["address"];
 $city =     $_POST["city"];
 $postal =   $_POST["postalcode"];
 $wifi =     $_POST["wifi"];
 $coffee =   $_POST["coffee"];
+$comment =  $_POST["comment"];
 $coffeeDiff = strcmp($coffee,"yes");
 if($coffeeDiff == 0) {
     $coffeeBool = 1;
@@ -36,6 +45,12 @@ if(!$postalValid) {
     return;
 }
 
+if(!$comment) {
+    $unencodedArray = ['resp' => 'invalid'];
+    echo json_encode($unencodedArray);
+    return;
+}
+
 $rating =   $_POST["rating"];
 $files =    $_FILES['images'];
 
@@ -48,16 +63,15 @@ $stmt->bindParam(':postal', $postal);
 try {
     $stmt->execute();
 
-
-
     $spaceId = $conn->lastInsertId();
 
-    $stmt2 = $conn->prepare("INSERT INTO Reviews (userId, spaceId, coffee, rating, wifi) VALUES (:userId, :spaceId, :coffee, :rating, :wifi)");
-    $stmt2->bindValue(':userId', 2, PDO::PARAM_INT);
-    $stmt2->bindValue(':spaceId', 2, PDO::PARAM_INT);
-    $stmt2->bindValue(':coffee', 0, PDO::PARAM_INT);
-    $stmt2->bindValue(':rating', 3, PDO::PARAM_INT);
-    $stmt2->bindValue(':wifi', 2, PDO::PARAM_INT);
+    $stmt2 = $conn->prepare("INSERT INTO Reviews (userId, spaceId, coffee, rating, wifi, comment, visit) VALUES (:userId, :spaceId, :coffee, :rating, :wifi, :comment, NOW())");
+    $stmt2->bindValue(':userId', $id, PDO::PARAM_INT);
+    $stmt2->bindValue(':spaceId', $spaceId, PDO::PARAM_INT);
+    $stmt2->bindValue(':coffee', $coffeeDiff, PDO::PARAM_INT);
+    $stmt2->bindValue(':rating', $rating, PDO::PARAM_INT);
+    $stmt2->bindValue(':wifi', $wifi, PDO::PARAM_INT);
+    $stmt2->bindParam(':comment', $comment);
 
     $stmt2->execute();
 
@@ -86,7 +100,9 @@ try {
         $stmt->bindValue(':imgLink', $result['ObjectURL']);
 
         $stmt->execute();
-        echo "added";
+        $unencodedArray = ['resp' => 'valid', 'id' => $spaceId];
+        echo json_encode($unencodedArray);
+        return;
     } catch (Exception $e) {
         echo $e->getMessage() . "\n";
     }

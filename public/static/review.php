@@ -47,6 +47,11 @@
                 </div><br>
 
                 <div class="form-entry">
+                    <label for="comment">Tell Us About Your Stay! (140 char max)</label><br>
+                    <input type="text" name="comment" id="comment" required maxlength="140">
+                </div><br>
+
+                <div class="form-entry">
                     <label for="image">Have a photo?</label><br>
                     <input name="images" type="file" id="image" multiple accept="image/x-png, image/gif, image/jpeg, image/jpg">
                 </div><br>

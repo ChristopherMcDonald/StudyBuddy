@@ -19,3 +19,15 @@ signIn = () => {
         }
     });
 }
+
+$(".index-search-form > input[name='pass']").keyup(function(event) {
+    if (event.keyCode === 13) {
+        signIn();
+    }
+});
+
+$(".index-search-form > input[name='email']").keyup(function(event) {
+    if (event.keyCode === 13) {
+        signIn();
+    }
+});

@@ -24,6 +24,8 @@ CREATE TABLE Reviews (
     coffee boolean,
     rating int,
     wifi int,
+    comment varchar(140),
+    visit datetime,
     PRIMARY KEY (id),
     FOREIGN KEY (userId)
         REFERENCES Users(id)
@@ -36,7 +38,7 @@ CREATE TABLE Reviews (
 
 CREATE TABLE SpaceImages (
     reviewId int,
-    imgLink varchar(50),
+    imgLink varchar(1024),
     alt varchar(40),
     FOREIGN KEY (reviewId)
         REFERENCES Reviews(id)

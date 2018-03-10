@@ -1,6 +1,12 @@
 <?php
+// allows for $_SESSION to be used
 session_start();
 
+/**
+ * [getHeader prints out the inside of the header tag]
+ * @param  [string] $page [adds a link to a CSS file of this name, index => index.css for example]
+ * @return [none]
+ */
 function getHeader($page) {
     echo '<meta charset="utf-8">
     <title>StudyBuddy</title>
@@ -27,6 +33,10 @@ function getHeader($page) {
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>';
 }
 
+/**
+ * [getNav prints out the nav bar for a page, for logged in users it offers review, search and log out. Else, signup and search.]
+ * @return [none] [description]
+ */
 function getNav() {
     echo '
     <div class="header">
@@ -38,15 +48,16 @@ function getNav() {
             <i class="fa fa-bars hide-it" aria-hidden="true"></i>
             <div class="dropdown">
                 <ul class="nav">
-                    <li><a href="/static/search.php">Custom Search</a></li>
-                    <li><a href="/static/review.php">Review</a></li>';
+                    <li><a href="/static/search.php">Custom Search</a></li>';
+    // if user is logged in...
     if($_SESSION["id"]) {
-        echo '<li><a href="/static/logout.php">Log Out</a></li>';
+        echo '      <li><a href="/static/review.php">Review</a></li>
+                    <li><a href="/static/logout.php">Log Out</a></li>';
     } else {
-        echo '<li><a href="/static/signup.php">Sign Up</a></li>';
+        echo '      <li><a href="/static/signup.php">Sign Up</a></li>';
     }
 
-    echo '</ul><!--.nav-->
+    echo '      </ul><!--.nav-->
             </div><!--.dropdown-->
         </div><!--.right-->
     </div><!--.header-->';

@@ -8,6 +8,7 @@
 
 .main > div {
     margin: 0 15vw;
+    margin-bottom: 5%;
 }
 
 .item {
@@ -119,11 +120,12 @@ button {
     color: white;
     font-family: 'Open Sans';
     font-size: 1.4em;
+    padding-bottom: 5%;
 }
 
 .comment {
     padding: 5%;
-    border-bottom: 1px solid white;
+    border-top: 1px solid white;
 }
 
 .comment p {

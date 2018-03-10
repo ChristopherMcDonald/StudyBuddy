@@ -1,3 +1,4 @@
+<!-- page for a single item in database, expects id in URL -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,17 +11,24 @@
             <div class="item">
                 <!-- item consists of img on top, and two detail divs below it -->
                 <?php
-                $id = $_GET["id"];
+                include 'creds.php';
 
+                // get ID from url, send to search if missing
+                $id = $_GET["id"];
+                if(!$id) {
+                    echo '<script>window.location.href = "/static/search.php";</script>';
+                }
+
+                // build connection to MySQL DB
                 $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $sql = "SELECT s.id, s.name, s.address, s.city, s.postal, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId WHERE s.id = ". $id . " GROUP BY s.id;";
+                $spaceQuery = "SELECT s.id, s.name, s.address, s.city, s.postal, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId WHERE s.id = ". $id . "  GROUP BY s.id;";
 
-                foreach($conn->query($sql) as $row) {
-                    $sql2 = "SELECT si.* from SpaceImages si JOIN Reviews r ON si.reviewId = r.id JOIN Spaces s ON s.id = r.spaceId WHERE s.id = ".$row['id']." LIMIT 1;";
+                foreach($conn->query($spaceQuery) as $row) {
+                    $imgQuery = "SELECT si.* from SpaceImages si JOIN Reviews r ON si.reviewId = r.id JOIN Spaces s ON s.id = r.spaceId WHERE s.id = ".$row['id']." LIMIT 1;";
 
-                    foreach($conn->query($sql2) as $row2) {
+                    foreach($conn->query($imgQuery) as $row2) {
                         echo '<div class="img"><img src="'.$row2["imgLink"].'" alt="'.$row2["alt"].'"><div class="right-switch switch">
                             <i class="fa fa-3x fa-chevron-right" onclick="switchImage(\'right\');"></i>
                         </div>
@@ -48,65 +56,34 @@
                     echo '</div>';
                     echo '<span class="sr-only">Wifi Rating: '.floor($row["avgWifi"]).'/5</span>';
                     echo '</div><br><br>';
+
+                    echo '<div id="map"></div>';
                 }
-                ?>
 
-                <div id="map"></div>
+                $reviewQuery = "SELECT r.*, u.firstName FROM Spaces s JOIN Reviews r ON s.id = r.spaceId JOIN Users u ON r.userId = u.id WHERE s.id = ". $id . ";";
 
-                <div class="comments">
-                    <h2>Comments</h2>
-                    <div class="comment">
+                echo '<div class="comments"><h2>Comments</h2>';
+                foreach($conn->query($reviewQuery) as $row) {
+                    $date = strtotime($row["visit"]);
+                    echo '<div class="comment">
                         <!-- comment is split into two columns, and a footer for text -->
-                        <div class="detail pull-left">
-                            <p class="author">Chris</p><br>
-                            <p class="date">Made on July 10, 2018</p><br>
-                        </div>
-                        <div class="detail pull-right">
-                            <p class="rating">Rating: 4/5</p><br>
-                            <i class="fa fa-coffee pull-right" aria-hidden="true"></i><br><br>
-                            <p>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                            <p><br>
-                        </div>
-                        <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div><!--.comment-->
+                        <div class="detail pull-left">';
+                    echo '<p class="author">'.$row["firstName"].'</p><br>
+                    <p class="date">Made on '.date('F d\, Y', $date).'</p><br></div>';
+                    echo '<div class="detail pull-right">
+                        <p class="rating">Rating: '.$row["rating"].'/5</p><br>';
+                    if($row["coffee"] == 1) {
+                        echo '<i class="fa fa-coffee pull-right" aria-hidden="true"></i><br><br>';
+                    }
+                    echo '<p>';
+                    for($j = 0; $j < $row["wifi"]; $j = $j + 1) {
+                        echo '<i class="fa fa-wifi" aria-hidden="true"></i>';
+                    }
+                    echo '</p><br></div>';
+                    echo '<p class="content">'.$row["comment"].'</p></div></div>';
+                }
 
-                    <div class="comment">
-                        <div class="detail pull-left">
-                            <p class="author">Chris</p><br>
-                            <p class="date">Made on July 10, 2018</p><br>
-                        </div>
-                        <div class="detail pull-right">
-                            <p class="rating">Rating: 4/5</p><br>
-                            <i class="fa fa-coffee pull-right" aria-hidden="true"></i><br><br>
-                            <p>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                        </p><br>
-                        </div>
-                        <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div><!--.comment-->
-
-                    <div class="comment">
-                        <div class="detail pull-left">
-                            <p class="author">Chris</p><br>
-                            <p class="date">Made on July 10, 2018</p><br>
-                        </div>
-                        <div class="detail pull-right">
-                            <p class="rating">Rating: 4/5</p><br>
-                            <i class="fa fa-coffee pull-right" aria-hidden="true"></i><br><br>
-                            <p>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                                <i class="fa fa-wifi" aria-hidden="true"></i>
-                            </p><br>
-                        </div>
-                        <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div><!--.comment-->
-                </div><!--.comments-->
+                ?>
                 <div class="bottom-right">
                     <button class="review-btn">Review</button>
                 </div>
@@ -129,26 +106,16 @@
      */
     initMap = () => {
         <?php
-        $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT s.id, s.name, s.address, s.city, s.postal FROM Spaces s WHERE s.id = ". $id .";";
 
-        $sql = "SELECT s.id, s.name, s.address, s.city, s.postal FROM Spaces s WHERE s.id = ". $_GET["id"] . ";";
-        $rows = $conn->query($sql)->fetchAll();
-        $row_cnt = sizeof($rows);
-
-        if($row_cnt > 0) {
-            echo 'var list = [';
-            for($j = 0; $j < $row_cnt - 1; $j++) {
-                $row = $rows[$j];
-
-                echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"},';
-            }
-
-            $row = end($rows);
-            echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"}];';
-        } else {
-            echo "var list = [];";
+        // builds lists of JSON objects to parse over
+        echo 'var list = [';
+        foreach($conn->query($sql) as $row) {
+            // fill in objects with lat/lng, addresses and names
+            echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"},';
         }
+        // close off list
+        echo '];';
         ?>
         // build map object with Google Maps API
         var map = new google.maps.Map(document.getElementById('map'), {
