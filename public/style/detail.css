@@ -26,6 +26,7 @@
 }
 
 .img {
+    width: 100%;
     margin-bottom: 2%;
     display: inline-block;
     position: relative;
@@ -133,6 +134,10 @@ button {
     font-family: 'Open Sans';
     font-size: 1em;
     display: inline-block;
+}
+
+.comment > p {
+    width: 100%;
 }
 
 #map {
