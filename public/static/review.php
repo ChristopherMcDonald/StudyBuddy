@@ -10,27 +10,37 @@
             <form class="form" action="POST"  onsubmit="validate(event);" action="/scripts/detailSubmission.php">
                 <div class="form-entry">
                     <label for="name">Name</label><br>
-                    <input type="text" name="name" id="name" required minlength="2">
+                    <input type="text" name="name" id="name" required minlength="2" 
+                        <?php if($_GET["name"]) { echo 'value="'.$_GET["name"].'" disabled="disabled"'; } ?>
+                    >
                 </div><br>
 
                 <div class="form-entry">
                     <label for="address">Address</label><br>
-                    <input type="text" name="address" id="address" required minlength="2">
+                    <input type="text" name="address" id="address" required minlength="2"
+                        <?php if($_GET["address"]) { echo 'value="'.$_GET["address"].'" disabled="disabled"'; } ?>
+                    >
                 </div><br>
 
                 <div class="form-entry">
                     <label for="city">City</label><br>
-                    <input type="text" name="city" id="city" required minlength="2">
+                    <input type="text" name="city" id="city" required minlength="2"
+                        <?php if($_GET["city"]) { echo 'value="'.$_GET["city"].'" disabled="disabled"'; } ?>
+                    >
                 </div><br>
                 
                 <div class="form-entry">
                     <label for="prov">Province</label><br>
-                    <input type="text" name="prov" id="prov" required minlength="2">
+                    <input type="text" name="prov" id="prov" required minlength="2"
+                        <?php if($_GET["prov"]) { echo 'value="'.$_GET["prov"].'" disabled="disabled"'; } ?>
+                    >
                 </div><br>
 
                 <div class="form-entry">
                     <label for="postalcode">Postal Code</label><br>
-                    <input type="text" name="postalcode" id="postalcode" required minlength="6" maxlength="6">
+                    <input type="text" name="postalcode" id="postalcode" required minlength="6" maxlength="6"
+                        <?php if($_GET["postal"]) { echo 'value="'.$_GET["postal"].'" disabled="disabled"'; } ?>
+                    >
                 </div><br>
 
                 <div class="form-entry">
@@ -60,7 +70,8 @@
                     <label for="image">Have a photo?</label><br>
                     <input name="images" type="file" id="image" multiple accept="image/x-png, image/gif, image/jpeg, image/jpg">
                 </div><br>
-
+                
+                <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>">
                 <input type="submit" class="submit">
             </form>
         </div><!--.main-->
@@ -74,6 +85,8 @@
             </p>
         </footer>
     </body>
+    <script>
+    </script>
     <script src="../js/review.js"> </script>
     <script src="../js/global.js"></script>
 </html>

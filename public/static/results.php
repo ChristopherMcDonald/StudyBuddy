@@ -18,9 +18,54 @@
                 // build connection to MySQL DB
                 $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                // pull GET variables
+                $name = $_GET["name"];
+                $postal = $_GET["postal"];
+                $wifi = $_GET["wifi"];
+                $coffee = $_GET["coffee"];
+                $rating = $_GET["rating"];
+                
+                // within 1/30 from current location
+                $lat = $_GET["lat"];
+                $lng = $_GET["lng"];
 
                 // gets data for every Space, along with average ratings for wifi / reviews and if they have coffee or not
-                $sql = "SELECT s.id, s.name, s.address, s.city, s.postal, s.province, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId GROUP BY r.id";
+                $sql = 'SELECT s.*, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi 
+                    FROM Spaces s 
+                    JOIN Reviews r ON s.id = r.spaceId';
+                    
+                $where = " WHERE 1 = 1";
+                
+                if(strlen($name) > 0) {
+                    $where = $where . " AND s.name LIKE '%$name%'";
+                }
+                
+                if(strlen($postal) > 0) {
+                    $where = $where . " AND s.postal = '$postal'";
+                }
+                
+                if($lat && $lng) {
+                    $where = $where . " AND (ABS(s.lat - $lat) <= 1) AND (ABS(s.lng - $lng) <= 1)";
+                }
+                
+                $having = " HAVING 1 = 1";
+                
+                if(strlen($wifi) > 0) {
+                    $having = $having . " AND avg(r.wifi) >= " . $wifi;
+                }
+                
+                if(strlen($rating) > 0) {
+                    $having = $having . " AND avg(r.rating) >= " . $rating;
+                }
+                
+                if(strlen($coffee) > 0) {
+                    if(strcmp($coffee, "yes") == 0) {
+                        $having = $having . " AND sum(r.coffee)/count(*) >= 0";
+                    }
+                }
+                
+                $sql = $sql . $where . ' GROUP BY r.id ' . $having;
 
                 // iterate over rows returned, accessible by $row
                 foreach($conn->query($sql) as $row) {
@@ -81,10 +126,7 @@
      */
     initMap = () => {
         <?php
-        // build custom SQL query for all Spaces
-        $sql = "SELECT * FROM Spaces s;";
-
-        // builds lists of JSON objects to parse over
+        // builds lists of JSON objects to parse over, using global SQL query
         echo 'var list = [';
         foreach($conn->query($sql) as $row) {
             // fill in objects with lat/lng, addresses and names
@@ -98,8 +140,8 @@
         
         // build map object with Google Maps API
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,           // how zoomed in view is
-            center: list[0]      // where map is centered
+            zoom: list[0] ? 10 : 0,           // how zoomed in view is
+            center: list[0] ? list[0] : {lat: -1, lng: -1}      // where map is centered
         });
 
         list.forEach((item) => {

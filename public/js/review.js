@@ -8,9 +8,11 @@ validate = (ev) => {
     ev.preventDefault();
 
     $(".form > .submit").attr("disabled", "disabled");
+    
+    post = ($("form > [name='id']").val() !== "") ? "../scripts/addReview.php" : "../scripts/detailSubmission.php";
 
     $.ajax({
-        url: "../scripts/detailSubmission.php",
+        url: post,
         data: new FormData($("form")[0]),
         processData: false,
         contentType: false,

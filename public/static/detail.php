@@ -23,9 +23,11 @@
                 $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $spaceQuery = "SELECT s.id, s.name, s.address, s.city, s.postal, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId WHERE s.id = ". $id . "  GROUP BY s.id;";
+                $spaceQuery = "SELECT s.*, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId WHERE s.id = ". $id . "  GROUP BY s.id;";
 
                 foreach($conn->query($spaceQuery) as $row) {
+                    // used below, will only run once due to ID where clause
+                    $globalRow = $row;
                     $imgQuery = "SELECT si.* from SpaceImages si JOIN Reviews r ON si.reviewId = r.id JOIN Spaces s ON s.id = r.spaceId WHERE s.id = ".$row['id']." LIMIT 1;";
 
                     foreach($conn->query($imgQuery) as $row2) {
@@ -41,6 +43,7 @@
                     echo '<p>'.$row["name"].'</p>';
                     echo '<p>'.$row["address"].'</p>';
                     echo '<p>'.$row["city"].'</p>';
+                    echo '<p>'.$row["province"].'</p>';
                     echo '<p>'.$row["postal"].'</p>';
                     echo '</div>';
 
@@ -80,9 +83,9 @@
                         echo '<i class="fa fa-wifi" aria-hidden="true"></i>';
                     }
                     echo '</p><br></div>';
-                    echo '<p class="content">'.$row["comment"].'</p></div></div>';
+                    echo '<p class="content">'.$row["comment"].'</p></div>';
                 }
-
+                echo '</div>';
                 ?>
                 <div class="bottom-right">
                     <button class="review-btn">Review</button>
@@ -178,6 +181,12 @@
         var index = imgs.indexOf($(".img > img").attr("src"));
         $(".img > img").attr("src", (dir == "right") ? imgs[(index + 1 + imgs.length) % imgs.length] : imgs[(index - 1 + imgs.length) % imgs.length]);
     }
+    
+    $(".review-btn").click(() => {
+        <?php
+            echo 'window.location = "/static/review.php?id='.$globalRow["id"].'&name='.$globalRow["name"].'&address='.$globalRow["address"].'&city='.$globalRow["city"].'&prov='.$globalRow["province"].'&postal='.$globalRow["postal"].'";';
+        ?>
+    });
     </script>
     <script src="../js/global.js"></script>
     <script async defer
