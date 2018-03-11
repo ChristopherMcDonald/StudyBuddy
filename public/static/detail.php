@@ -106,21 +106,24 @@
      */
     initMap = () => {
         <?php
-        $sql = "SELECT s.id, s.name, s.address, s.city, s.postal FROM Spaces s WHERE s.id = ". $id .";";
+        // build custom SQL query for all Spaces
+        $sql = "SELECT * FROM Spaces s WHERE id = ". $id;
 
         // builds lists of JSON objects to parse over
         echo 'var list = [';
         foreach($conn->query($sql) as $row) {
             // fill in objects with lat/lng, addresses and names
-            echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"},';
+            echo '{lat: '.$row["lat"].', lng: '.$row["lng"].', id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'", province: "'.$row["province"].'", postal:"'.$row["postal"].'"},';
         }
         // close off list
         echo '];';
         ?>
+        
+        list = list.filter(item => item.lat !== -1 && item.lng !== -1);
         // build map object with Google Maps API
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,           // how zoomed in view is
-            center: list[0]      // where map is centered
+            zoom: list[0] ? 10 : 0,           // how zoomed in view is
+            center: list[0] ? list[0] : {lat: -1, lng: -1}      // where map is centered
         });
 
         list.forEach((item) => {

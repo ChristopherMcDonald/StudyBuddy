@@ -19,6 +19,7 @@ if(!$id) {
 $name =     $_POST["name"];
 $address =  $_POST["address"];
 $city =     $_POST["city"];
+$prov =     $_POST["prov"];
 $postal =   $_POST["postalcode"];
 $wifi =     $_POST["wifi"];
 $coffee =   $_POST["coffee"];
@@ -30,7 +31,7 @@ if($coffeeDiff == 0) {
     $coffeeBool = 0;
 }
 
-if(strlen($name) == 0 || strlen($address) == 0 || strlen($city) == 0) {
+if(strlen($name) == 0 || strlen($address) == 0 || strlen($city) == 0 || strlen($prov) == 0 ) {
     $unencodedArray = ['resp' => 'invalid'];
     echo json_encode($unencodedArray);
     return;
@@ -51,14 +52,24 @@ if(!$comment) {
     return;
 }
 
+$jsonurl = "https://maps.googleapis.com/maps/api/geocode/json?address=".str_replace(" ", "+", $address).",+".str_replace(" ", "+",$city).",+".str_replace(" ", "+", $prov)."&key=$mapsKey";
+$json = file_get_contents($jsonurl);
+$obj = json_decode($json);
+
+$lat = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+$lng = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+
 $rating =   $_POST["rating"];
 $files =    $_FILES['images'];
 
-$stmt = $conn->prepare("INSERT INTO Spaces (name, address, city, postal) VALUES (:name, :address, :city, :postal)");
+$stmt = $conn->prepare("INSERT INTO Spaces (name, address, city, province, postal, lat, lng) VALUES (:name, :address, :city, :province, :postal, :lat, :lng)");
 $stmt->bindParam(':name', $name);
 $stmt->bindParam(':address', $address);
+$stmt->bindParam(':province', $prov);
 $stmt->bindParam(':city', $city);
 $stmt->bindParam(':postal', $postal);
+$stmt->bindParam(':lat', $lat);
+$stmt->bindParam(':lng', $lng);
 
 try {
     $stmt->execute();

@@ -22,6 +22,11 @@
                     <label for="city">City</label><br>
                     <input type="text" name="city" id="city" required minlength="2">
                 </div><br>
+                
+                <div class="form-entry">
+                    <label for="prov">Province</label><br>
+                    <input type="text" name="prov" id="prov" required minlength="2">
+                </div><br>
 
                 <div class="form-entry">
                     <label for="postalcode">Postal Code</label><br>

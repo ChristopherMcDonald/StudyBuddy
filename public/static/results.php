@@ -20,7 +20,7 @@
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 // gets data for every Space, along with average ratings for wifi / reviews and if they have coffee or not
-                $sql = "SELECT s.id, s.name, s.address, s.city, s.postal, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId GROUP BY r.id";
+                $sql = "SELECT s.id, s.name, s.address, s.city, s.postal, s.province, sum(r.coffee)/count(*) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi FROM Spaces s JOIN Reviews r ON s.id = r.spaceId GROUP BY r.id";
 
                 // iterate over rows returned, accessible by $row
                 foreach($conn->query($sql) as $row) {
@@ -42,6 +42,7 @@
                     echo '<div class="detail pull-left"><a href="/static/detail.php?id='.$row["id"].'">'.$row['name'].'</a>';
                     echo '<p class="">'.$row['address'].'</p>';
                     echo '<p class="">'.$row['city'].'</p>';
+                    echo '<p class="">'.$row['province'].'</p>';
                     echo '<p class="">'.$row['postal'].'</p></div>';
                     echo '<div class="detail pull-right">';
                     echo '<p class="pull-right">Overall: '.floor($row['avgRate']).'/5</p><br>';
@@ -81,17 +82,20 @@
     initMap = () => {
         <?php
         // build custom SQL query for all Spaces
-        $sql = "SELECT s.id, s.name, s.address, s.city, s.postal FROM Spaces s;";
+        $sql = "SELECT * FROM Spaces s;";
 
         // builds lists of JSON objects to parse over
         echo 'var list = [';
         foreach($conn->query($sql) as $row) {
             // fill in objects with lat/lng, addresses and names
-            echo '{lat: 43.260806, lng: -79.920407, id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'",postal:"'.$row["postal"].'"},';
+            echo '{lat: '.$row["lat"].', lng: '.$row["lng"].', id: "'.$row["id"].'", name: "'.$row["name"].'", address: "'.$row["address"].'", city: "'.$row["city"].'", province: "'.$row["province"].'", postal:"'.$row["postal"].'"},';
         }
         // close off list
         echo '];';
         ?>
+        
+        list = list.filter(item => item.lat !== -1 && item.lng !== -1);
+        
         // build map object with Google Maps API
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,           // how zoomed in view is
