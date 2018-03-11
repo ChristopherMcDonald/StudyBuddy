@@ -65,7 +65,7 @@
                     }
                 }
                 
-                $sql = $sql . $where . ' GROUP BY r.id ' . $having;
+                $sql = $sql . $where . ' GROUP BY s.id ' . $having;
 
                 // iterate over rows returned, accessible by $row
                 foreach($conn->query($sql) as $row) {
