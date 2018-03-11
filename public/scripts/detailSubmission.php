@@ -23,12 +23,11 @@ $prov =     $_POST["prov"];
 $postal =   $_POST["postalcode"];
 $wifi =     $_POST["wifi"];
 $coffee =   $_POST["coffee"];
-$comment =  $_POST["comment"];
-$coffeeDiff = strcmp($coffee,"yes");
-if($coffeeDiff == 0) {
-    $coffeeBool = 1;
+$comment =  $_POST["comment"]; 
+if(strcmp($coffee,"yes"); == 0) {
+    $coffeeInt = 1;
 } else {
-    $coffeeBool = 0;
+    $coffeeInt = 0;
 }
 
 if(strlen($name) == 0 || strlen($address) == 0 || strlen($city) == 0 || strlen($prov) == 0 ) {
@@ -79,7 +78,7 @@ try {
     $stmt2 = $conn->prepare("INSERT INTO Reviews (userId, spaceId, coffee, rating, wifi, comment, visit) VALUES (:userId, :spaceId, :coffee, :rating, :wifi, :comment, NOW())");
     $stmt2->bindValue(':userId', $id, PDO::PARAM_INT);
     $stmt2->bindValue(':spaceId', $spaceId, PDO::PARAM_INT);
-    $stmt2->bindValue(':coffee', $coffeeDiff, PDO::PARAM_INT);
+    $stmt2->bindValue(':coffee', $coffeeInt, PDO::PARAM_INT);
     $stmt2->bindValue(':rating', $rating, PDO::PARAM_INT);
     $stmt2->bindValue(':wifi', $wifi, PDO::PARAM_INT);
     $stmt2->bindParam(':comment', $comment);
