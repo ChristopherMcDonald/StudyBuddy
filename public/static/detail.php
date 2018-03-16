@@ -16,7 +16,7 @@
                 // get ID from url, send to search if missing
                 $id = $_GET["id"];
                 if(!$id) {
-                    echo '<script>window.location.href = "/static/search.php";</script>';
+                    echo '<script>window.location.href = "/search";</script>';
                 }
 
                 // build connection to MySQL DB
@@ -86,10 +86,11 @@
                     echo '<p class="content">'.$row["comment"].'</p></div>';
                 }
                 echo '</div>';
+
+                if($_SESSION["id"]) {
+                    echo '<div class="bottom-right"><button class="review-btn">Review</button></div>';
+                }
                 ?>
-                <div class="bottom-right">
-                    <button class="review-btn">Review</button>
-                </div>
             </div><!--.item-->
         </div><!--.main-->
         <div id="error-disp">
@@ -121,7 +122,7 @@
         // close off list
         echo '];';
         ?>
-        
+
         list = list.filter(item => item.lat !== -1 && item.lng !== -1);
         // build map object with Google Maps API
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -138,7 +139,7 @@
 
             var info = new google.maps.InfoWindow({
                 // what will show when clicked
-                content: '<div><a href="/static/detail.php?id=' + item.id + '">' + item.name + '</a><p>' + item.address + '</p><p>' + item.city + '</p><p>' + item.postal + '</p></div>'
+                content: '<div><a href="/detail?id=' + item.id + '">' + item.name + '</a><p>' + item.address + '</p><p>' + item.city + '</p><p>' + item.postal + '</p></div>'
             });
 
             marker.addListener('click', function() {
@@ -181,10 +182,10 @@
         var index = imgs.indexOf($(".img > img").attr("src"));
         $(".img > img").attr("src", (dir == "right") ? imgs[(index + 1 + imgs.length) % imgs.length] : imgs[(index - 1 + imgs.length) % imgs.length]);
     }
-    
+
     $(".review-btn").click(() => {
         <?php
-            echo 'window.location = "/static/review.php?id='.$globalRow["id"].'&name='.$globalRow["name"].'&address='.$globalRow["address"].'&city='.$globalRow["city"].'&prov='.$globalRow["province"].'&postal='.$globalRow["postal"].'";';
+            echo 'window.location = "/review?id='.$globalRow["id"].'&name='.$globalRow["name"].'&address='.$globalRow["address"].'&city='.$globalRow["city"].'&prov='.$globalRow["province"].'&postal='.$globalRow["postal"].'";';
         ?>
     });
     </script>

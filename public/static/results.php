@@ -31,7 +31,7 @@
                 $lng = $_GET["lng"];
 
                 // gets data for every Space, along with average ratings for wifi / reviews and if they have coffee or not
-                $sql = 'SELECT s.*, floor(sum(r.coffee)/count(*)) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi 
+                $sql = 'SELECT s.*, floor(sum(r.coffee)/count(*)) as coffeeCount, avg(r.rating) as avgRate, avg(r.wifi) as avgWifi
                     FROM Spaces s
                     JOIN Reviews r ON s.id = r.spaceId';
 
@@ -46,7 +46,7 @@
                 }
 
                 if($lat && $lng) {
-                    $where = $where . " AND (ABS(s.lat - $lat) <= 1) AND (ABS(s.lng - $lng) <= 1)";
+                    $where = $where . " AND (ABS(s.lat - ".floatval($lat).") <= 1) AND (ABS(s.lng - ".floatval($lng).") <= 1)";
                 }
 
                 $having = " HAVING 1 = 1";
@@ -84,7 +84,7 @@
                         echo '<div class="item"><div class="img pull-left"><img src="../img/coffee.jpg" alt="Sample Image"></div>';
                     }
 
-                    echo '<div class="detail pull-left"><a href="/static/detail.php?id='.$row["id"].'">'.$row['name'].'</a>';
+                    echo '<div class="detail pull-left"><a href="/detail?id='.$row["id"].'">'.$row['name'].'</a>';
                     echo '<p class="">'.$row['address'].'</p>';
                     echo '<p class="">'.$row['city'].'</p>';
                     echo '<p class="">'.$row['province'].'</p>';
@@ -153,7 +153,7 @@
 
             var info = new google.maps.InfoWindow({
                 // what will show when clicked
-                content: '<div id="content"><a href="/static/detail.php?id=' + item.id + '">' + item.name + '</a><p>' + item.address + '</p><p>' + item.city + '</p><p class="pull-left">' + item.postal + '</p></div>'
+                content: '<div id="content"><a href="/detail?id=' + item.id + '">' + item.name + '</a><p>' + item.address + '</p><p>' + item.city + '</p><p class="pull-left">' + item.postal + '</p></div>'
             });
 
             marker.addListener('click', function() {

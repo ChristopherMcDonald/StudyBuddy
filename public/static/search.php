@@ -8,7 +8,7 @@
         <div class="main">
             <h1 class="title">Find a Study Space!</h1><br><br>
 
-            <form method="GET" class="form" action="/static/results.php">
+            <form method="GET" class="form" action="/results">
                 <div class="form-entry">
                     <label for="name">Name</label><br>
                     <input type="text" name="name" id="name">

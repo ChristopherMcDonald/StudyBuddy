@@ -10,7 +10,7 @@
             <form class="form" action="POST"  onsubmit="validate(event);" action="/scripts/detailSubmission.php">
                 <div class="form-entry">
                     <label for="name">Name</label><br>
-                    <input type="text" name="name" id="name" required minlength="2" 
+                    <input type="text" name="name" id="name" required minlength="2"
                         <?php if($_GET["name"]) { echo 'value="'.$_GET["name"].'" disabled="disabled"'; } ?>
                     >
                 </div><br>
@@ -28,7 +28,7 @@
                         <?php if($_GET["city"]) { echo 'value="'.$_GET["city"].'" disabled="disabled"'; } ?>
                     >
                 </div><br>
-                
+
                 <div class="form-entry">
                     <label for="prov">Province</label><br>
                     <input type="text" name="prov" id="prov" required minlength="2"
@@ -45,7 +45,7 @@
 
                 <div class="form-entry">
                     <label for="wifi">How good was their Wifi (1-5)?</label><br>
-                    <input type="number" name="wifi" id="wifi" required>
+                    <input type="number" name="wifi" id="wifi" required min="1" max="5">
                 </div><br><br>
 
                 <div class="form-entry">
@@ -58,7 +58,7 @@
 
                 <div class="form-entry">
                     <label for="rating">How good is this Study Space (1-5)?</label><br>
-                    <input type="number" name="rating" id="rating" required>
+                    <input type="number" name="rating" id="rating" required min="1" max="5">
                 </div><br>
 
                 <div class="form-entry">
@@ -70,7 +70,7 @@
                     <label for="image">Have a photo?</label><br>
                     <input name="images" type="file" id="image" multiple accept="image/x-png, image/gif, image/jpeg, image/jpg">
                 </div><br>
-                
+
                 <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>">
                 <input type="submit" class="submit">
             </form>

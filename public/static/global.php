@@ -48,13 +48,13 @@ function getNav() {
             <i class="fa fa-bars hide-it" aria-hidden="true"></i>
             <div class="dropdown">
                 <ul class="nav">
-                    <li><a href="/static/search.php">Custom Search</a></li>';
+                    <li><a href="/search">Custom Search</a></li>';
     // if user is logged in...
     if($_SESSION["id"]) {
-        echo '      <li><a href="/static/review.php">Review</a></li>
-                    <li><a href="/static/logout.php">Log Out</a></li>';
+        echo '      <li><a href="/review">Review</a></li>
+                    <li><a href="/logout">Log Out</a></li>';
     } else {
-        echo '      <li><a href="/static/signup.php">Sign Up</a></li>';
+        echo '      <li><a href="/signup">Sign Up</a></li>';
     }
 
     echo '      </ul><!--.nav-->

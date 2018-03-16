@@ -23,8 +23,8 @@ $prov =     $_POST["prov"];
 $postal =   $_POST["postalcode"];
 $wifi =     $_POST["wifi"];
 $coffee =   $_POST["coffee"];
-$comment =  $_POST["comment"]; 
-if(strcmp($coffee,"yes"); == 0) {
+$comment =  $_POST["comment"];
+if(strcmp($coffee,"yes") == 0) {
     $coffeeInt = 1;
 } else {
     $coffeeInt = 0;
@@ -97,21 +97,25 @@ try {
     $bucket = "studybuddyimages";
     $file = $_FILES['images'];
     try {
-        $result = $s3Client->putObject([
-            'Bucket'     => $bucket,
-            'ContentType' => $file['type'],
-            'Key'        => $file['name'],
-            'SourceFile' => $file['tmp_name']
-        ]);
 
-        $stmt = $conn->prepare("INSERT INTO SpaceImages (reviewId, alt, imgLink) VALUES (:reviewId, :alt, :imgLink)");
-        $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
-        $stmt->bindValue(':alt', $file['name']);
-        $stmt->bindValue(':imgLink', $result['ObjectURL']);
+        if($file) {
+            $result = $s3Client->putObject([
+                'Bucket'     => $bucket,
+                'ContentType' => $file['type'],
+                'Key'        => $file['name'],
+                'SourceFile' => $file['tmp_name']
+            ]);
 
-        $stmt->execute();
-        $unencodedArray = ['resp' => 'valid', 'id' => $spaceId];
-        echo json_encode($unencodedArray);
+            $stmt = $conn->prepare("INSERT INTO SpaceImages (reviewId, alt, imgLink) VALUES (:reviewId, :alt, :imgLink)");
+            $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
+            $stmt->bindValue(':alt', $file['name']);
+            $stmt->bindValue(':imgLink', $result['ObjectURL']);
+
+            $stmt->execute();
+            $unencodedArray = ['resp' => 'valid', 'id' => $spaceId];
+            echo json_encode($unencodedArray);
+        }
+
         return;
     } catch (Exception $e) {
         echo $e->getMessage() . "\n";

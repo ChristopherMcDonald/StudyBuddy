@@ -1,0 +1,6 @@
+RewriteEngine On    # Turn on the rewriting engine
+RewriteRule    ^search/?$    static/search.php    [NC,L]
+RewriteRule    ^signup/?$    static/signup.php    [NC,L]
+RewriteRule    ^results/?$    static/results.php    [NC,L]
+RewriteRule    ^detail/?$    static/detail.php    [NC,L]
+RewriteRule    ^review/?$    static/review.php    [NC,L]
