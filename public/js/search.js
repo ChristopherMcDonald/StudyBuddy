@@ -7,7 +7,7 @@ window.onload = () => {
     // navigator.geolocation.getCurrentPosition((pos) => {
     //     // build request to Google Maps API for PostalCode, pos.coords.latitude, pos.coords.longitude
     //     var req = "https://maps.googleapis.com/maps/api/geocode/json?" + "latlng=" + pos.coords.latitude + "," + pos.coords.longitude + "&sensor=true&key=AIzaSyDAj6W1p_IKsLfigZ805LdoyrYWcj6samY";
-    // 
+    //
     // });
 }
 
@@ -17,6 +17,6 @@ window.onload = () => {
  */
 findNearMe = () => {
     navigator.geolocation.getCurrentPosition((pos) => {
-        window.location = '/static/results.php?lat' + pos.coords.latitude + ',lng=' + pos.coords.longitude;
+        window.location = '/static/results.php?lat' + pos.coords.latitude + '&lng=' + pos.coords.longitude;
     });
 }
