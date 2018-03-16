@@ -84,7 +84,7 @@
                         echo '<div class="item"><div class="img pull-left"><img src="../img/coffee.jpg" alt="Sample Image"></div>';
                     }
 
-                    echo '<div class="detail pull-left"><a href="/detail?id='.$row["id"].'">'.$row['name'].'</a>';
+                    echo '<div class="detail pull-left"><a href="/detail/'.$row["id"].'">'.$row['name'].'</a>';
                     echo '<p class="">'.$row['address'].'</p>';
                     echo '<p class="">'.$row['city'].'</p>';
                     echo '<p class="">'.$row['province'].'</p>';
@@ -153,7 +153,7 @@
 
             var info = new google.maps.InfoWindow({
                 // what will show when clicked
-                content: '<div id="content"><a href="/detail?id=' + item.id + '">' + item.name + '</a><p>' + item.address + '</p><p>' + item.city + '</p><p class="pull-left">' + item.postal + '</p></div>'
+                content: '<div id="content"><a href="/detail/' + item.id + '">' + item.name + '</a><p>' + item.address + '</p><p>' + item.city + '</p><p class="pull-left">' + item.postal + '</p></div>'
             });
 
             marker.addListener('click', function() {

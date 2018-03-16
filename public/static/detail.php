@@ -149,7 +149,7 @@
 
             var info = new google.maps.InfoWindow({
                 // what will show when clicked
-                content: '<div><a href="/detail?id=' + item.id + '">' + item.name + '</a><p>' + item.address + '</p><p>' + item.city + '</p><p>' + item.postal + '</p></div>'
+                content: '<div><a href="/detail/' + item.id + '">' + item.name + '</a><p>' + item.address + '</p><p>' + item.city + '</p><p>' + item.postal + '</p></div>'
             });
 
             marker.addListener('click', function() {
