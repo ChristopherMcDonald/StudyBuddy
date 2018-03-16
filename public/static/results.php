@@ -45,8 +45,8 @@
                     $where = $where . " AND s.postal = '$postal'";
                 }
 
-                if($lat && $lng) {
-                    $where = $where . " AND (ABS(s.lat - ".floatval($lat).") <= 0.03) AND (ABS(s.lng - ".floatval($lng).") <= 0.03)";
+                if(strlen($lng) > 0 and strlen($lat) > 0) {
+                    $where = $where . ' AND (ABS(s.lat - '.floatval($lat).') <= 0.03) AND (ABS(s.lng - '.floatval($lng).') <= 0.03)';
                 }
 
                 $having = " HAVING 1 = 1";

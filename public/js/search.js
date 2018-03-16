@@ -17,6 +17,6 @@ window.onload = () => {
  */
 findNearMe = () => {
     navigator.geolocation.getCurrentPosition((pos) => {
-        window.location = '/static/results.php?lat' + pos.coords.latitude + '&lng=' + pos.coords.longitude;
+        window.location = '/static/results.php?lat=' + pos.coords.latitude + '&lng=' + pos.coords.longitude;
     });
 }
