@@ -30,8 +30,18 @@
                     $globalRow = $row;
                     $imgQuery = "SELECT si.* from SpaceImages si JOIN Reviews r ON si.reviewId = r.id JOIN Spaces s ON s.id = r.spaceId WHERE s.id = ".$row['id']." LIMIT 1;";
 
-                    foreach($conn->query($imgQuery) as $row2) {
+                    $imgRows = $conn->query($imgQuery)->fetchAll();
+
+                    if(sizeof($imgRows) > 0) {
+                        $row2 = $imgRows[0];
                         echo '<div class="img"><img src="'.$row2["imgLink"].'" alt="'.$row2["alt"].'"><div class="right-switch switch">
+                            <i class="fa fa-3x fa-chevron-right" onclick="switchImage(\'right\');"></i>
+                        </div>
+                        <div class="left-switch switch">
+                            <i class="fa fa-3x fa-chevron-left" onclick="switchImage(\'left\');"></i>
+                        </div></div>';
+                    } else {
+                        echo '<div class="img"><img src="../img/coffee.jpg" alt="Coffee"><div class="right-switch switch">
                             <i class="fa fa-3x fa-chevron-right" onclick="switchImage(\'right\');"></i>
                         </div>
                         <div class="left-switch switch">
