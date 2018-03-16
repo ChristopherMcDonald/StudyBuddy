@@ -46,7 +46,7 @@
                 }
 
                 if($lat && $lng) {
-                    $where = $where . " AND (ABS(s.lat - ".floatval($lat).") <= 1) AND (ABS(s.lng - ".floatval($lng).") <= 1)";
+                    $where = $where . " AND (ABS(s.lat - ".floatval($lat).") <= 0.03) AND (ABS(s.lng - ".floatval($lng).") <= 0.03)";
                 }
 
                 $having = " HAVING 1 = 1";
