@@ -20,7 +20,7 @@ validate = (ev) => {
         success: data => {
             res = JSON.parse(data);
             if(res.resp == 'valid') {
-                window.location = "/static/detail/" + res.id;
+                window.location = "/detail/" + res.id;
             } else {
                 displayError("Something went wrong... Please reload and try again.")
             }

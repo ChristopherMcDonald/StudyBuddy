@@ -10,7 +10,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $email = $_POST["email"];
 $pass = $_POST["pass"];
 
-$sql = 'SELECT id, password FROM Users WHERE email = "'. $email . '" LIMIT 1';
+$sql = 'SELECT id, firstName, password FROM Users WHERE email = "'. $email . '" LIMIT 1';
 $user = $conn->query($sql)->fetchAll();
 
 if (sizeof($user) == 1) {
@@ -36,6 +36,7 @@ if (sizeof($user) == 1) {
 
         $unencodedArray = ['jwt' => $jwt, 'resp' => 'valid user'];
         $_SESSION["id"] = $user[0]["id"];
+        $_SESSION["name"] = $user[0]["firstName"];
         echo json_encode($unencodedArray);
     } else {
         $unencodedArray = ['resp' => 'invalid user'];

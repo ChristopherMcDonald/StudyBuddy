@@ -72,11 +72,9 @@ try {
 
     $stmt->execute();
 
-
-    date_default_timezone_set('America/New_York');
-    $date = date('m/d/Y h:i:s a', time());
+    $date = new DateTime('now');
     $content = '<div class="comment"><!-- comment is split into two columns, and a footer for text --><div class="detail pull-left">';
-    $content = $content. '<p class="author">TEST</p><br><p class="date">Made on '.date('F d\, Y', $date).'</p><br></div>';
+    $content = $content. '<p class="author">'.$_SESSION["name"].'</p><br><p class="date">Made on '.date('F d\, Y', $date).'</p><br></div>';
     $content = $content. '<div class="detail pull-right"><p class="rating">Rating: '.$rating.'/5</p><br>';
     if($row["coffee"] == 1) {
         $content = $content. '<i class="fa fa-coffee pull-right" aria-hidden="true"></i><br><br>';
