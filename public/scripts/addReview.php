@@ -39,7 +39,7 @@ $files =    $_FILES['images'];
 $stmt2 = $conn->prepare("INSERT INTO Reviews (userId, spaceId, coffee, rating, wifi, comment, visit) VALUES (:userId, :spaceId, :coffee, :rating, :wifi, :comment, NOW())");
 $stmt2->bindValue(':userId', $userId, PDO::PARAM_INT);
 $stmt2->bindValue(':spaceId', $spaceId, PDO::PARAM_INT);
-$stmt2->bindValue(':coffee', $coffeeDiff, PDO::PARAM_INT);
+$stmt2->bindValue(':coffee', $coffeeBool, PDO::PARAM_INT);
 $stmt2->bindValue(':rating', $rating, PDO::PARAM_INT);
 $stmt2->bindValue(':wifi', $wifi, PDO::PARAM_INT);
 $stmt2->bindParam(':comment', $comment);
