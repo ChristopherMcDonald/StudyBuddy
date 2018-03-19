@@ -71,7 +71,24 @@ try {
     $stmt->bindValue(':imgLink', $result['ObjectURL']);
 
     $stmt->execute();
-    $unencodedArray = ['resp' => 'valid', 'id' => $spaceId];
+
+
+    date_default_timezone_set('America/New_York');
+    $date = date('m/d/Y h:i:s a', time());
+    $content = '<div class="comment"><!-- comment is split into two columns, and a footer for text --><div class="detail pull-left">';
+    $content = $content. '<p class="author">TEST</p><br><p class="date">Made on '.date('F d\, Y', $date).'</p><br></div>';
+    $content = $content. '<div class="detail pull-right"><p class="rating">Rating: '.$rating.'/5</p><br>';
+    if($row["coffee"] == 1) {
+        $content = $content. '<i class="fa fa-coffee pull-right" aria-hidden="true"></i><br><br>';
+    }
+    $content = $content . '<p>';
+    for($j = 0; $j < $wifi; $j = $j + 1) {
+        $content = $content. '<i class="fa fa-wifi" aria-hidden="true"></i>';
+    }
+    $content = $content . '</p><br></div>';
+    $content = $content . '<p class="content">'.$comment.'</p></div>';
+
+    $unencodedArray = ['resp' => 'valid', 'content' => $content, 'link' => $result['ObjectURL']];
     echo json_encode($unencodedArray);
     return;
 } catch (Exception $e) {

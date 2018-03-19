@@ -103,6 +103,45 @@
                 ?>
             </div><!--.item-->
         </div><!--.main-->
+        <div id="review-modal">
+
+            <form class="form" onsubmit="validate(event);">
+                <h1 class="title">How did you like this place?</h1><br><br>
+
+                <div class="form-entry">
+                    <label for="wifi">How good was their Wifi (1-5)?</label><br>
+                    <input type="number" name="wifi" id="wifi" required min="1" max="5">
+                </div><br><br>
+
+                <div class="form-entry">
+                    <label>Did they have coffee?</label><br><br>
+                    <input type="radio" name="coffee" value="yes" id="coffee-y" required>
+                    <label for="coffee-y">Yes</label>
+                    <input type="radio" name="coffee" value="no" id="coffee-n">
+                    <label for="coffee-n">No</label>
+                </div><br><br>
+
+                <div class="form-entry">
+                    <label for="rating">How good is this Study Space (1-5)?</label><br>
+                    <input type="number" name="rating" id="rating" required min="1" max="5">
+                </div><br>
+
+                <div class="form-entry">
+                    <label for="comment">Tell Us About Your Stay! (140 char max)</label><br>
+                    <input type="text" name="comment" id="comment" required maxlength="140">
+                </div><br>
+
+                <div class="form-entry">
+                    <label for="image">Have a photo?</label><br>
+                    <input name="images" type="file" id="image" multiple accept="image/x-png, image/gif, image/jpeg, image/jpg" required>
+                </div><br>
+
+                <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>">
+                <input type="submit" class="submit">
+                <button type="button" class="cancel"onclick="close();">Cancel</button>
+            </form>
+
+        </div><!--.review-modal"-->
         <div id="error-disp">
             <i class="fa fa-times" onclick="hideError();"></i><p> Some ERROR </p>
         </div><!--.error-disp-->
@@ -193,11 +232,54 @@
         $(".img > img").attr("src", (dir == "right") ? imgs[(index + 1 + imgs.length) % imgs.length] : imgs[(index - 1 + imgs.length) % imgs.length]);
     }
 
+    /**
+     * [$ description] TODO
+     * @var [type]
+     */
     $(".review-btn").click(() => {
-        <?php
-            echo 'window.location = "/review?id='.$globalRow["id"].'&name='.$globalRow["name"].'&address='.$globalRow["address"].'&city='.$globalRow["city"].'&prov='.$globalRow["province"].'&postal='.$globalRow["postal"].'";';
-        ?>
+        $("#review-modal").animate({bottom: 0}, 300);
     });
+
+    /**
+     * [$ description] TODO
+     * @var [type]
+     */
+    $(".form > button").click(() => {
+        $("#review-modal").animate({bottom: '-100vh'}, 300);
+    });
+
+    /**
+     * [validate validates input fields, navs to page / makes request on success]
+     * @param  {[event]} ev [click event]
+     * @return {none}
+     */
+    validate = (ev) => {
+        // stops form from posting / getting
+        ev.preventDefault();
+
+        $(".form > .submit").attr("disabled", "disabled");
+
+        post = "../scripts/addReview.php";
+
+        $.ajax({
+            url: post,
+            data: new FormData($("form")[0]),
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: data => {
+                res = JSON.parse(data);
+                $(".comments").append(res.content);
+                imgs.push(res.link);
+                $("#review-modal").animate({bottom: '-100vh'}, 300);
+                $(".form > .submit").removeAttr("disabled");
+            },
+            error: data => {
+                console.log(data);
+                $(".form > .submit").removeAttr("disabled");
+            }
+        });
+    };
     </script>
     <script src="../js/global.js"></script>
     <script async defer

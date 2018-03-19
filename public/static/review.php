@@ -7,7 +7,7 @@
         <?php getNav(); ?>
         <div class="main">
             <h1 class="title">Found a Study Space?</h1><br><br>
-            <form class="form" action="POST"  onsubmit="validate(event);" action="/scripts/detailSubmission.php">
+            <form class="form" action="POST" onsubmit="validate(event);">
                 <div class="form-entry">
                     <label for="name">Name</label><br>
                     <input type="text" name="name" id="name" required minlength="2"

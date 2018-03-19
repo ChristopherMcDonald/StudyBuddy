@@ -140,6 +140,99 @@ button {
     width: 100%;
 }
 
+#review-modal {
+    background-color: rgba(0,0,0,0.7);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    bottom: -100vh;
+    left: 0;
+    z-index: 100;
+}
+
+.form > h1 {
+    padding-top: 10%;
+    font-family: 'Open Sans';
+    font-size: 2.2em;
+    text-align: center;
+    color: white;
+}
+
+.form {
+    padding: 0 30%;
+    padding-bottom: 15%;
+}
+
+.form-entry {
+    display: inline-block;
+    width: 100%;
+}
+
+.form-entry label {
+    color: white;
+    font-family: 'Open Sans';
+}
+
+.form-entry input {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+input {
+    display: inline-block;
+    width: 100%;
+    border-radius: 6px;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    padding: 5px;
+    border: none;
+}
+
+input:focus {
+    outline-color: #05386B;
+}
+
+.submit, .cancel {
+    width: 40%;
+    font-size: 1em;
+    background-color: #5CDB95;
+    border: none;
+    color: black;
+}
+
+.form > button {
+    border-radius: 6px;
+    background-color: #e74c3c;
+    color: white;
+}
+
+.cancel {
+    text-align: center;
+}
+
+input[type="radio"] {
+    width: auto;
+}
+
+input[type="range"] {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.form-entry > p {
+    padding-bottom: 10px;
+    color: white;
+    font-family: 'Open Sans';
+}
+
+.range > .pull-right {
+    margin-right: -10px;
+}
+
+label[for="coffee-y"] {
+    margin-right: 10px;
+}
+
 #map {
     margin-top: 10%;
     clear: both;

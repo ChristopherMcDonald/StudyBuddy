@@ -8,8 +8,8 @@ validate = (ev) => {
     ev.preventDefault();
 
     $(".form > .submit").attr("disabled", "disabled");
-    
-    post = ($("form > [name='id']").val() !== "") ? "../scripts/addReview.php" : "../scripts/detailSubmission.php";
+
+    post = "../scripts/detailSubmission.php";
 
     $.ajax({
         url: post,
@@ -20,7 +20,7 @@ validate = (ev) => {
         success: data => {
             res = JSON.parse(data);
             if(res.resp == 'valid') {
-                window.location = "/static/detail.php?id=" + res.id;
+                window.location = "/static/detail/" + res.id;
             } else {
                 displayError("Something went wrong... Please reload and try again.")
             }
