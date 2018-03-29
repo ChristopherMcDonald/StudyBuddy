@@ -3,6 +3,9 @@ A reviewing site for libraries, coffee shops and pretty much anywhere to study! 
 
 Live version hosted at [StudyBuddy](https://www.studybuddy.world).
 
+## Add on Task
+I did do the AJAX one!
+
 ## Built With
 The technology and frameworks to make this are as follows:
 - [Google Fonts](https://fonts.google.com)
@@ -12,4 +15,4 @@ The technology and frameworks to make this are as follows:
 - [Unsplash](https://www.unsplash.com)
 
 ## Authors
-Me, myself and I (Christopher McDonald).
+Me, myself and I (Christopher McDonald, 001312456).
