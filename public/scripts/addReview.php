@@ -1,14 +1,17 @@
 <?php
 session_start();
+// import libraries...
 include '../static/creds.php';
 require '../../vendor/autoload.php';
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
 $credentials = new Aws\Credentials\Credentials($apikey,$secret);
 
+// build SQL connection
 $conn = new PDO("mysql:host=$serv;dbname=$name", $user, $pass);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+// find if user ir logged in...
 $userId = $_SESSION["id"];
 if(!$userId) {
     $unencodedArray = ['resp' => 'invalid'];
@@ -16,6 +19,7 @@ if(!$userId) {
     return;
 }
 
+// get values
 $spaceId =  $_POST["id"];
 $wifi =     $_POST["wifi"];
 $coffee =   $_POST["coffee"];

@@ -9,10 +9,8 @@ validate = (ev) => {
 
     $(".form > .submit").attr("disabled", "disabled");
 
-    post = "../scripts/detailSubmission.php";
-
     $.ajax({
-        url: post,
+        url: "../scripts/detailSubmission.php",
         data: new FormData($("form")[0]),
         processData: false,
         contentType: false,

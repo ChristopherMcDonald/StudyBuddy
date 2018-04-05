@@ -37,18 +37,23 @@
 
                 $where = " WHERE 1 = 1";
 
+                // if name was provided, add to query
                 if(strlen($name) > 0) {
                     $where = $where . " AND s.name LIKE '%$name%'";
                 }
 
+                // if postal was provided, add to query
                 if(strlen($postal) > 0) {
                     $where = $where . " AND s.postal = '$postal'";
                 }
 
+                // only if lat AND lng are provided, add to query
                 if(strlen($lng) > 0 and strlen($lat) > 0) {
+                    // space is "in range" if within 0.1 lat and lng of location
                     $where = $where . ' AND (ABS(s.lat - '.floatval($lat).') <= 0.1) AND (ABS(s.lng - '.floatval($lng).') <= 0.1)';
                 }
 
+                // allows just appending AND ...
                 $having = " HAVING 1 = 1";
 
                 if(strlen($wifi) > 0) {
