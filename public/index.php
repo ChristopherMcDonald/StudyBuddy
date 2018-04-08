@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#">
     <head>
-        <?php include 'static/global.php'; getHeader('index'); ?>
+        <?php session_start(); include 'static/global.php'; getHeader('index'); ?>
 
         <!-- OpenGraph Metadata -->
         <meta property="og:image" content="https://www.studybuddy.world/img/overhead-study-overlay-small.jpg">
@@ -24,15 +24,25 @@
                 <br>
                 <h1 style="color: white">Start your search today!</h1>
                 <br><br>
-
-                <form class="index-search-form">
-                    <!-- <input name="address" type="text" class="search" placeholder="1 Microsoft Way"> -->
-                    <label for="email">Email Address</label>
-                    <input name="email" type="email" class="search" placeholder="john@locke.com">
-                    <label for="pass">Password</label>
-                    <input name="pass" type="password" class="search" placeholder="Password">
-                    <input class="submit" name="submit" type="button" value="Sign In" onclick="signIn();">
-                </form>
+                <?php
+                    $id = $_SESSION["id"];
+                    if(!$id) {
+                        echo '<form class="index-search-form">
+                                <!-- <input name="address" type="text" class="search" placeholder="1 Microsoft Way"> -->
+                                <label for="email">Email Address</label>
+                                <input name="email" type="email" class="search" placeholder="john@locke.com">
+                                <label for="pass">Password</label>
+                                <input name="pass" type="password" class="search" placeholder="Password">
+                                <input class="submit" name="submit" type="button" value="Sign In" onclick="signIn();">
+                            </form>';
+                    } else {
+                        echo '<form class="index-search-form">
+                                <input class="submit" name="submit" type="button" value="Search" onclick="window.location.href = \'/search\'">
+                                <input class="submit" name="submit" type="button" value="Review" onclick="window.location.href = \'/review\'">
+                            </form>';
+                    }
+                ?>
+                
             </div><!--.content-->
         </div><!--.splash-->
         <div id="error-disp">
