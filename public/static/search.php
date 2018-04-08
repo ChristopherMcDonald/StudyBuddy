@@ -37,6 +37,9 @@
                     <input type="number" name="rating" id="rating" min="1" max="5">
                 </div><br>
 
+                <input type="hidden" name="lat" value="">
+                <input type="hidden" name="lng" value="">
+
                 <input type="submit" class="submit">
                 <input type="button" class="submit near-me" value="Find Near Me" onclick="findNearMe();">
             </form>
